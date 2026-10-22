@@ -139,3 +139,99 @@ add_filter(
 	10,
 	2
 );
+
+/*
+ * The welcome screen, shown once just after activation.
+ *
+ * Registered here rather than inside the admin include, because the
+ * activation flag has to be set whatever else is loaded.
+ */
+require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/dahu-welcome.php';
+
+/*
+ * The flag, not a redirect: an activation hook that redirects breaks bulk
+ * activation and WP-CLI, which activate several plugins in one request. The
+ * welcome screen reads the flag on the next page load, where a redirect is
+ * safe, and clears it when several plugins were activated together.
+ */
+register_activation_hook(
+	__FILE__,
+	static function () {
+		Dahu_Welcome::mark_activated( 'dahu-weight-shipping' );
+	}
+);
+
+add_action(
+	'init',
+	static function () {
+		Dahu_Welcome::register(
+			array(
+				'slug'       => 'dahu-weight-shipping',
+				'name'       => __( 'Weight shipping', 'dahu-weight-shipping' ),
+				'tagline'    => __( 'Keeps the order weight right, so the shipping price is too.', 'dahu-weight-shipping' ),
+				'file'       => DAHU_WEIGHT_SHIPPING_FILE,
+				'version'    => DAHU_WEIGHT_SHIPPING_VERSION,
+				'textdomain' => 'dahu-weight-shipping',
+				/*
+				 * Les mots de l'accueil viennent d'ici : le fichier partagé est
+				 * recopié dans toute la famille et ne peut donc porter aucun
+				 * domaine de traduction.
+				 */
+				'strings'    => array(
+					'next'   => __( 'Next', 'dahu-weight-shipping' ),
+					'done'   => __( 'Done', 'dahu-weight-shipping' ),
+					'skip'   => __( 'Skip', 'dahu-weight-shipping' ),
+					'of'     => __( 'of', 'dahu-weight-shipping' ),
+					'denied' => __( 'You are not allowed to view this page.', 'dahu-weight-shipping' ),
+				),
+				'points'     => array(
+				array(
+					'title' => __( 'Computed from the lines', 'dahu-weight-shipping' ),
+					'text'  => __( 'The weight follows what is actually in the order.', 'dahu-weight-shipping' ),
+				),
+				array(
+					'title' => __( 'Visible on the order', 'dahu-weight-shipping' ),
+					'text'  => __( 'Shown where somebody packing can check it.', 'dahu-weight-shipping' ),
+				),
+				array(
+					'title' => __( 'Recalculated on demand', 'dahu-weight-shipping' ),
+					'text'  => __( 'One button when the order changed.', 'dahu-weight-shipping' ),
+				),
+				),
+
+				/*
+				 * The one-time tour.
+				 *
+				 * This plugin has no screen of its own: its only interface is the
+				 * "Shipping weight" panel on the order edit screen, so that is
+				 * where the tour plays. The hook below is the order screen of a
+				 * shop using high-performance order storage; a shop on the legacy
+				 * storage edits orders on post.php and does not see the tour.
+				 *
+				 * Every selector points at markup the panel always renders: it
+				 * holds no condition on data or settings. The "out of date"
+				 * notice is left out on purpose, it is hidden until a quantity
+				 * changes.
+				 */
+				'tour_screen' => 'woocommerce_page_wc-orders',
+				'tour'        => array(
+					array(
+						'selector' => '#dahu-ws-weight-value',
+						'title'    => __( 'The order weight', 'dahu-weight-shipping' ),
+						'text'     => __( 'Worked out from the lines of this order.', 'dahu-weight-shipping' ),
+					),
+					array(
+						'selector' => '#dahu-ws-weight-refresh',
+						'title'    => __( 'Refresh after edits', 'dahu-weight-shipping' ),
+						'text'     => __( 'Click it once the quantities have changed.', 'dahu-weight-shipping' ),
+					),
+					array(
+						'selector' => '.dahu-ws-panel__note',
+						'title'    => __( 'The weight that is priced', 'dahu-weight-shipping' ),
+						'text'     => __( 'This is the weight that enters the price grid.', 'dahu-weight-shipping' ),
+					),
+				),
+			)
+		);
+	}
+);

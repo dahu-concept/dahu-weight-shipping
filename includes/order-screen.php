@@ -104,7 +104,7 @@ function dahu_weight_shipping_render_weight_panel( $post_or_order ) {
 	$unit = get_option( 'woocommerce_weight_unit', 'kg' );
 
 	?>
-	<div class="dahu-ws-panel" id="dahu-ws-weight-panel">
+	<div class="dahu-ui dahu-ws-panel" id="dahu-ws-weight-panel">
 		<p class="dahu-ws-panel__figure">
 			<strong class="dahu-ws-panel__value" id="dahu-ws-weight-value"><?php echo esc_html( dahu_weight_shipping_format_weight( $weight ) ); ?></strong>
 			<span class="dahu-ws-panel__unit"><?php echo esc_html( $unit ); ?></span>
@@ -113,7 +113,7 @@ function dahu_weight_shipping_render_weight_panel( $post_or_order ) {
 			<?php esc_html_e( 'Quantities have changed on screen, so this weight is out of date.', 'dahu-weight-shipping' ); ?>
 		</p>
 		<p class="dahu-ws-panel__actions">
-			<button type="button" class="button" id="dahu-ws-weight-refresh">
+			<button type="button" class="dahu-ui-btn" id="dahu-ws-weight-refresh">
 				<?php esc_html_e( 'Refresh', 'dahu-weight-shipping' ); ?>
 			</button>
 		</p>
@@ -146,10 +146,23 @@ function dahu_weight_shipping_enqueue_order_assets() {
 		return;
 	}
 
+	// The family sheet first, and its own second: the plugin's own rules
+	// are written to sit on top of the shared components, so the order is
+	// a dependency and not a hope. One handle across the family -- the
+	// file is byte-identical everywhere, so whichever plugin loads it
+	// first serves all of them, and a shop with six of these installed
+	// downloads one copy.
+	wp_enqueue_style(
+		'dahu-ui',
+		DAHU_WEIGHT_SHIPPING_URL . 'assets/css/dahu-ui.css',
+		array(),
+		DAHU_WEIGHT_SHIPPING_VERSION
+	);
+
 	wp_enqueue_style(
 		'dahu-weight-shipping-order',
 		DAHU_WEIGHT_SHIPPING_URL . 'assets/css/admin-order.css',
-		array(),
+		array( 'dahu-ui' ),
 		DAHU_WEIGHT_SHIPPING_VERSION
 	);
 
