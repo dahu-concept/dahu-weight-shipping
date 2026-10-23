@@ -321,10 +321,12 @@ function dahu_weight_shipping_method_init() {
 		 * Validates the grid as typed.
 		 *
 		 * Valid lines are normalised, malformed ones are refused with a
-		 * message on screen rather than swallowed. And when NOTHING is valid
-		 * the previous grid is kept: saving an empty grid would price every
-		 * weight at zero, which reads as free shipping rather than as a
-		 * mistake.
+		 * message on screen rather than swallowed, and a field holding
+		 * nothing BUT malformed lines keeps the previous grid: a grid nobody
+		 * managed to type is not a decision to stop charging.
+		 *
+		 * A field the shop deliberately CLEARED is a different thing, and it
+		 * is saved -- see the comment on that branch below.
 		 *
 		 * @param string $key   Field key.
 		 * @param string $value Submitted value.
@@ -355,12 +357,68 @@ function dahu_weight_shipping_method_init() {
 				return (string) $this->get_option( 'weight_grid', '' );
 			}
 
+			/*
+			 * AN EMPTIED GRID IS SAVED, AND SAID OUT LOUD.
+			 *
+			 * A malformed grid is caught above: it raises an error, and the
+			 * previous grid is kept. A grid the shop simply CLEARED raises no
+			 * error at all -- there is no bad line to complain about -- so it
+			 * used to be saved in silence, and from then on every order was
+			 * priced from the weight at zero.
+			 *
+			 * Clearing a field is an ordinary thing to do while reconfiguring,
+			 * and the outcome costs the shop money on every order. It is also
+			 * precisely what `dahu_weight_shipping_price_for_weight()` says it
+			 * exists to avoid: a plausible-looking number that is invisibly
+			 * wrong.
+			 *
+			 * The grid is still saved, because pricing by class alone is a
+			 * legitimate setup and refusing an empty grid would take it away.
+			 * What changes is that the shop is told, and told what it means --
+			 * and only when nothing else prices the package either, so a
+			 * class-priced shop is not scolded for a setup that works.
+			 */
+			if ( empty( $grid ) && empty( $errors ) && $can_report && ! $this->has_any_class_cost() ) {
+				WC_Admin_Settings::add_error(
+					__( 'Weight price grid', 'dahu-weight-shipping' ) . ' — '
+					. __( 'the grid is empty and no shipping class has a cost, so this method now quotes 0 for every order. Add a bracket, or a class cost, or remove the method from the zone.', 'dahu-weight-shipping' )
+				);
+			}
+
 			return dahu_weight_shipping_format_grid( $grid );
 		}
 
 		/* -----------------------------------------------------------------
 		 * Reading the settings
 		 * -------------------------------------------------------------- */
+
+		/**
+		 * Whether any shipping class carries a cost on this instance.
+		 *
+		 * Used to tell an empty grid that prices nothing from an empty grid in
+		 * a shop that prices by class only -- the second is a setup, the first
+		 * is free shipping nobody asked for.
+		 *
+		 * @return bool
+		 */
+		private function has_any_class_cost() {
+
+			/*
+			 * One cost per class, not a single option: each class carries its
+			 * own `class_cost_<id>` setting, written by init_form_fields().
+			 * Reading an option named `class_costs` -- which does not exist --
+			 * would always answer "no cost at all", so the warning would ring
+			 * precisely in the shops that price by class, which is the one
+			 * place it must stay quiet.
+			 */
+			foreach ( array_keys( $this->get_shipping_class_options() ) as $class_id ) {
+				if ( $this->get_class_cost( $class_id ) > 0 ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
 
 		/**
 		 * This instance's grid, as brackets.

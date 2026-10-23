@@ -6,7 +6,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"PO-Revision-Date: 2026-10-23 11:23+0000\n"
+"PO-Revision-Date: 2026-10-23 14:32+0000\n"
 "X-Generator: dahu i18n-build\n"
 
 #. translators: 1: shipping method name, 2: zone instance id. */
@@ -305,7 +305,7 @@ msgstr "Titre quand c’est offert"
 msgid "Visible on the order"
 msgstr "Visible sur la commande"
 
-#: includes/shipping-method.php:202 includes/shipping-method.php:342 includes/shipping-method.php:350
+#: includes/shipping-method.php:202 includes/shipping-method.php:344 includes/shipping-method.php:352 includes/shipping-method.php:383
 msgid "Weight price grid"
 msgstr "Grille de prix au poids"
 
@@ -357,7 +357,7 @@ msgstr "Zone : %s"
 msgid "cost brought down to zero by a free-shipping coupon"
 msgstr "coût ramené à zéro par un code promo de livraison offerte"
 
-#: includes/shipping-method.php:351
+#: includes/shipping-method.php:353
 msgid "no valid bracket was found, so the previous grid has been kept."
 msgstr "aucune tranche valable n’a été trouvée, la grille précédente a donc été conservée."
 
@@ -372,4 +372,8 @@ msgstr "prix saisi à la main"
 #: includes/order-screen.php:241
 msgid "priced automatically"
 msgstr "tarifée automatiquement"
+
+#: includes/shipping-method.php:384
+msgid "the grid is empty and no shipping class has a cost, so this method now quotes 0 for every order. Add a bracket, or a class cost, or remove the method from the zone."
+msgstr "la grille est vide et aucune classe de livraison ne porte de coût : cette méthode annonce donc désormais 0 pour chaque commande. Ajoutez une tranche, ou un coût de classe, ou retirez la méthode de la zone."
 

@@ -4,7 +4,7 @@ Tags: woocommerce, shipping, weight, shipping zones, shipping classes
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -173,6 +173,9 @@ cost excluding tax only, and leaves the tax to WooCommerce's own
 admin.
 
 == Changelog ==
+
+= 1.1.2 =
+* Clearing the weight price grid no longer happens in silence. The grid is still saved -- pricing by shipping class alone is a valid setup -- but when no class carries a cost either, the settings screen now says that the method will quote 0 for every order, and what to do about it.
 
 = 1.1.1 =
 * The weight panel on an order with no lines yet now says so, instead of leaving a bold zero under a sentence about the weight that enters the price grid.

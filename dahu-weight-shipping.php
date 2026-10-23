@@ -3,7 +3,7 @@
  * Plugin Name:       Dahu Weight Shipping
  * Plugin URI:        https://dahu-concept.fr
  * Description:       A weight-based WooCommerce shipping method configurable per zone, with a per-zone price grid, shipping-class rules, and one-click shipping lines on manually created orders.
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Hugo Vial-Jaime
  * Author URI:        mailto:contact@dahu-concept.fr
  * License:           MIT
@@ -19,7 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'DAHU_WEIGHT_SHIPPING_VERSION', '1.1.1' );
+define( 'DAHU_WEIGHT_SHIPPING_VERSION', '1.1.2' );
 define( 'DAHU_WEIGHT_SHIPPING_FILE', __FILE__ );
 define( 'DAHU_WEIGHT_SHIPPING_PATH', plugin_dir_path( __FILE__ ) );
 define( 'DAHU_WEIGHT_SHIPPING_URL', plugin_dir_url( __FILE__ ) );
