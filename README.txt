@@ -4,11 +4,11 @@ Tags: woocommerce, shipping, weight, shipping zones, shipping classes
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Price WooCommerce shipping from the real weight of the cart, with a grid per zone and per-class rules — plus one-click shipping lines on manual orders.
+Price WooCommerce shipping on the real weight of the cart, with a grid per zone and class rules — plus one-click shipping lines on manual orders.
 
 == Description ==
 
@@ -174,10 +174,23 @@ admin.
 
 == Changelog ==
 
+= 1.1.1 =
+* The weight panel on an order with no lines yet now says so, instead of leaving a bold zero under a sentence about the weight that enters the price grid.
+
+= 1.1.0 =
+* The activation screen now opens on the plugin's own mark rather than its initials, and the banner carries the same drawing as a watermark.
+
+= 1.0.1 =
+* A shipping zone instance deleted since the order screen was opened is now refused before it is written to the shipping line, instead of binding the line to an instance nothing can price.
+* A refusal from the server is now shown on the order screen. It used to leave the cost field untouched without a word.
+
 = 1.0.0 =
 * First public release.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Fixes a shipping line that could be attached to a deleted zone instance, and a refusal that was not shown.
 
 = 1.0.0 =
 First public release.

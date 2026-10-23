@@ -6,362 +6,370 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"PO-Revision-Date: 2026-10-21 10:19+0000\n"
+"PO-Revision-Date: 2026-10-23 11:23+0000\n"
 "X-Generator: dahu i18n-build\n"
 
 #. translators: 1: shipping method name, 2: zone instance id. */
-#: \includes\order-ajax.php:355
+#: includes/order-ajax.php:402
 msgid "%1$s #%2$d"
 msgstr "%1$s n° %2$d"
 
-#: \includes\order-screen.php:223
+#: includes/order-screen.php:239
 msgid "Add shipping"
 msgstr "Ajouter la livraison"
 
-#: \includes\shipping-method.php:261
+#: includes/shipping-method.php:261
 msgid "Always free"
 msgstr "Toujours offerte"
 
-#: \includes\shipping-method.php:249
+#: includes/shipping-method.php:249
 msgid "As soon as one product in the cart carries one of these classes, NO weight at all enters the grid — not its own, and not that of the items alongside it. Only the flat class costs below are charged. This covers the case of a product whose shipping is already priced into it and which carries whatever ships with it."
 msgstr "Dès qu’un produit du panier porte l’une de ces classes, AUCUN poids n’entre dans la grille — ni le sien, ni celui des articles qui l’accompagnent. Seuls les coûts fixes par classe ci-dessous sont facturés. Cela couvre le cas d’un produit dont la livraison est déjà comprise dans son prix et qui emporte ce qui part avec lui."
 
-#: \includes\order-screen.php:231
+#: includes/order-screen.php:247
 msgid "Calculating…"
 msgstr "Calcul en cours…"
 
-#: \includes\shipping-method.php:299
+#: includes/shipping-method.php:299
 msgid "Charged PER UNIT, on top of whatever the weight grid returns. Leave a class empty to charge nothing for it."
 msgstr "Facturé À L’UNITÉ, en plus de ce que renvoie la grille au poids. Laissez une classe vide pour ne rien facturer dessus."
 
-#: \includes\order-screen.php:224
+#: includes/order-screen.php:240
 msgid "Choose a shipping method"
 msgstr "Choisissez une méthode de livraison"
 
-#: \includes\shipping-method.php:270
+#: includes/shipping-method.php:270
 msgid "Classes earning free shipping"
 msgstr "Classes donnant droit à la livraison offerte"
 
-#: \includes\shipping-method.php:236
+#: includes/shipping-method.php:236
 msgid "Classes kept out of the weight grid"
 msgstr "Classes exclues de la grille au poids"
 
-#: \includes\shipping-method.php:246
+#: includes/shipping-method.php:246
 msgid "Classes that cancel the weight grid"
 msgstr "Classes qui annulent la grille au poids"
 
-#: \dahu-weight-shipping.php:226
+#: dahu-weight-shipping.php:235
 msgid "Click it once the quantities have changed."
 msgstr "Cliquez une fois les quantités changées."
 
-#: \dahu-weight-shipping.php:189
+#: dahu-weight-shipping.php:198
 msgid "Computed from the lines"
 msgstr "Calculé depuis les lignes"
 
-#: \includes\shipping-method.php:310
+#: includes/shipping-method.php:310
 msgid "Cost for \"%s\""
 msgstr "Coût pour « %s »"
 
-#: \includes\order-screen.php:238
+#: includes/order-screen.php:254
 msgid "Creating the shipping line is taking longer than expected. Check whether an empty shipping line has appeared on the order and delete it before trying again."
 msgstr "La création de la ligne de livraison prend plus de temps que prévu. Vérifiez qu’une ligne de livraison vide n’est pas apparue sur la commande, et supprimez-la avant de réessayer."
 
-#: \includes\order-screen.php:228
+#: includes/order-screen.php:244
 msgid "Creating the shipping line…"
 msgstr "Création de la ligne de livraison…"
 
-#: \includes\order-screen.php:239
+#: includes/order-screen.php:255
 msgid "Dismiss"
 msgstr "Ignorer"
 
-#: \dahu-weight-shipping.php:182
+#: dahu-weight-shipping.php:191
 msgid "Done"
 msgstr "Terminé"
 
-#: \includes\shipping-method.php:212
+#: includes/shipping-method.php:212
 msgid "Each rule below is read from the classes present in the cart. Leaving a field empty disables that rule entirely."
 msgstr "Chaque règle ci-dessous se lit à partir des classes présentes dans le panier. Laisser un champ vide désactive entièrement cette règle."
 
-#: \includes\shipping-method.php:297
+#: includes/shipping-method.php:297
 msgid "Flat cost per shipping class"
 msgstr "Coût fixe par classe de livraison"
 
-#: \includes\shipping-method.php:256
+#: includes/shipping-method.php:256
 msgid "Free shipping"
 msgstr "Livraison offerte"
 
-#: \includes\shipping-method.php:226
+#: includes/shipping-method.php:226
 msgid "Hide if the cart contains"
 msgstr "Masquer si le panier contient"
 
-#: \dahu-weight-shipping.php:171
+#: dahu-weight-shipping.php:171
 msgid "Keeps the order weight right, so the shipping price is too."
 msgstr "Garde le poids de la commande juste, donc le prix d’expédition aussi."
 
 #. translators: 1: line number, 2: the rejected line as typed. */
-#: \includes\grid.php:143
+#: includes/grid.php:143
 msgid "Line %1$d ignored (\"%2$s\"): the expected format is \"min-max:price\", for example \"0-2:18\"."
 msgstr "Ligne %1$d ignorée (« %2$s ») : le format attendu est « min-max:prix », par exemple « 0-2:18 »."
 
 #. translators: 1: line number, 2: the rejected line as typed. */
-#: \includes\grid.php:157
+#: includes/grid.php:157
 msgid "Line %1$d ignored (\"%2$s\"): the maximum weight must be greater than the minimum weight."
 msgstr "Ligne %1$d ignorée (« %2$s ») : le poids maximum doit être supérieur au poids minimum."
 
-#: \includes\order-screen.php:229
+#: includes/order-screen.php:245
 msgid "Loading the shipping methods…"
 msgstr "Chargement des méthodes de livraison…"
 
-#: \dahu-weight-shipping.php:181
+#: dahu-weight-shipping.php:190
 msgid "Next"
 msgstr "Suivant"
 
-#: \includes\order-screen.php:237
+#: includes/order-screen.php:132
+msgid "No items on this order yet: the weight appears as soon as you add one."
+msgstr "Aucun article sur cette commande pour l’instant : le poids s’affiche dès que vous en ajoutez un."
+
+#: includes/order-screen.php:253
 msgid "No shipping method is enabled for the zone matching this order's country. Check the country on the order, and the zone under WooCommerce, Settings, Shipping."
 msgstr "Aucune méthode de livraison n’est activée pour la zone correspondant au pays de cette commande. Vérifiez le pays sur la commande, et la zone sous WooCommerce, Réglages, Livraison."
 
-#: \includes\calculators.php:212
+#: includes/calculators.php:212
 msgid "No shipping method was found for that zone instance. It may have been removed from the zone since this line was created."
 msgstr "Aucune méthode de livraison n’a été trouvée pour cette instance de zone. Elle a peut-être été retirée de la zone depuis la création de cette ligne."
 
-#: \includes\order-ajax.php:268
+#: includes/order-ajax.php:291
 msgid "No shipping zone instance was given."
 msgstr "Aucune instance de zone de livraison n’a été fournie."
 
-#: \includes\shipping-method.php:204
+#: includes/shipping-method.php:204
 msgid "One bracket per line, as <code>min-max:price</code> — for example <code>0-2:18</code>. Weights in the shop's weight unit, prices excluding tax. The minimum is EXCLUDED from the bracket and the maximum INCLUDED, so \"0-2:18\" covers anything above 0 and up to 2. Past the last bracket, that bracket's price applies. This grid belongs to this zone only."
 msgstr "Une tranche par ligne, sous la forme <code>min-max:prix</code> — par exemple <code>0-2:18</code>. Poids dans l’unité de poids de la boutique, prix hors taxes. Le minimum est EXCLU de la tranche et le maximum INCLUS : « 0-2:18 » couvre donc tout ce qui dépasse 0 et va jusqu’à 2. Au-delà de la dernière tranche, c’est son prix qui s’applique. Cette grille n’appartient qu’à cette zone."
 
-#: \dahu-weight-shipping.php:198
+#: dahu-weight-shipping.php:207
 msgid "One button when the order changed."
 msgstr "Un bouton quand la commande a changé."
 
-#: \includes\shipping-method.php:280
+#: includes/shipping-method.php:280
 msgid "One such product is enough"
 msgstr "Un seul produit de ce type suffit"
 
-#: \includes\order-ajax.php:50
+#: includes/order-ajax.php:50
 msgid "Order not found."
 msgstr "Commande introuvable."
 
-#: \includes\order-screen.php:235
+#: includes/order-screen.php:251
 msgid "Please save this order once, with Create or Update, before adding a shipping line."
 msgstr "Enregistrez cette commande une fois, avec Créer ou Mettre à jour, avant d’ajouter une ligne de livraison."
 
-#: \includes\shipping-method.php:110
+#: includes/shipping-method.php:110
 msgid "Prices a shipment from the real weight of the cart, using a price grid belonging to this zone, with per-class rules for flat costs, free shipping and exclusions."
 msgstr "Tarife un envoi à partir du poids réel du panier, avec une grille de prix propre à cette zone et des règles par classe de livraison : coûts fixes, livraison offerte et exclusions."
 
-#: \includes\shipping-method.php:273
+#: includes/shipping-method.php:273
 msgid "Products in these classes make the shipment free. Whether that applies to the whole order or only to an order made up of nothing else is the next setting."
 msgstr "Les produits de ces classes rendent l’envoi gratuit. Que cela vaille pour toute la commande ou seulement pour une commande qui n’est composée que de ça, c’est le réglage suivant."
 
-#: \includes\shipping-method.php:239
+#: includes/shipping-method.php:239
 msgid "Products in these classes never contribute their weight to the grid. They are billed only through their own flat cost below. This is for goods a separate carrier handles at a contract price — a bulky item on a pallet, for instance — whose weight would otherwise push the rest of the order into a higher bracket."
 msgstr "Les produits de ces classes n’apportent jamais leur poids à la grille. Ils ne sont facturés que par leur propre coût fixe ci-dessous. C’est fait pour une marchandise qu’un transporteur distinct prend en charge à un prix contractuel — un volumineux sur palette, par exemple — dont le poids ferait sinon monter le reste de la commande d’une tranche."
 
-#: \includes\order-screen.php:113
+#: includes/order-screen.php:113
 msgid "Quantities have changed on screen, so this weight is out of date."
 msgstr "Les quantités ont changé à l’écran : ce poids n’est plus à jour."
 
-#: \dahu-weight-shipping.php:197
+#: dahu-weight-shipping.php:206
 msgid "Recalculated on demand"
 msgstr "Recalculé à la demande"
 
-#: \includes\order-screen.php:117 \includes\order-screen.php:232
+#: includes/order-screen.php:117 includes/order-screen.php:248
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: \dahu-weight-shipping.php:225
+#: dahu-weight-shipping.php:234
 msgid "Refresh after edits"
 msgstr "Rafraîchissez après modification"
 
-#: \includes\shipping-method.php:185
+#: includes/shipping-method.php:185
 msgid "Shipping"
 msgstr "Livraison"
 
-#: \includes\shipping-method.php:210
+#: includes/shipping-method.php:210
 msgid "Shipping class rules"
 msgstr "Règles par classe de livraison"
 
-#: \includes\order-screen.php:234
+#: includes/order-screen.php:250
 msgid "Shipping cost: %s"
 msgstr "Coût de livraison : %s"
 
-#: \includes\order-ajax.php:69
+#: includes/order-ajax.php:69
 msgid "Shipping line not found."
 msgstr "Ligne de livraison introuvable."
 
-#: \includes\order-screen.php:66
+#: includes/order-screen.php:66
 msgid "Shipping weight"
 msgstr "Poids d’expédition"
 
-#: \dahu-weight-shipping.php:116
+#: dahu-weight-shipping.php:116
 msgid "Shipping zones"
 msgstr "Zones de livraison"
 
-#: \includes\shipping-method.php:216
+#: includes/shipping-method.php:216
 msgid "Show only if the cart contains"
 msgstr "N’afficher que si le panier contient"
 
-#: \dahu-weight-shipping.php:194
+#: dahu-weight-shipping.php:203
 msgid "Shown where somebody packing can check it."
 msgstr "Affiché là où la personne qui emballe peut le vérifier."
 
-#: \dahu-weight-shipping.php:183
+#: dahu-weight-shipping.php:192
 msgid "Skip"
 msgstr "Passer"
 
-#: \dahu-weight-shipping.php:134
+#: dahu-weight-shipping.php:134
 msgid "Support"
 msgstr "Assistance"
 
-#: \includes\shipping-method.php:190
+#: includes/shipping-method.php:190
 msgid "Tax status"
 msgstr "Statut fiscal"
 
-#: \includes\shipping-method.php:195
+#: includes/shipping-method.php:195
 msgctxt "Tax status"
 msgid "None"
 msgstr "Aucun"
 
-#: \includes\shipping-method.php:194
+#: includes/shipping-method.php:194
 msgid "Taxable"
 msgstr "Taxable"
 
-#: \includes\calculators.php:156
+#: includes/order-ajax.php:313
+msgid "That shipping zone instance no longer exists: it has been removed from its zone since this screen was opened. Reload the order and add the shipping line again."
+msgstr "Cette instance de zone d'expédition n'existe plus : elle a été retirée de sa zone depuis l'ouverture de cet écran. Rechargez la commande et ajoutez de nouveau la ligne d'expédition."
+
+#: includes/calculators.php:156
 msgid "The calculator for this shipping method returned nothing usable."
 msgstr "Le calculateur de cette méthode de livraison n’a rien renvoyé d’exploitable."
 
-#: \dahu-weight-shipping.php:220
+#: dahu-weight-shipping.php:229
 msgid "The order weight"
 msgstr "Le poids de la commande"
 
-#: \includes\calculators.php:143
+#: includes/calculators.php:143
 msgid "The price for this shipping method has to be filled in by hand."
 msgstr "Le prix de cette méthode de livraison doit être saisi à la main."
 
-#: \includes\order-screen.php:236
+#: includes/order-screen.php:252
 msgid "The shipping methods could not be loaded. Check the connection and try again."
 msgstr "Les méthodes de livraison n’ont pas pu être chargées. Vérifiez la connexion et réessayez."
 
-#: \dahu-weight-shipping.php:190
+#: dahu-weight-shipping.php:199
 msgid "The weight follows what is actually in the order."
 msgstr "Le poids suit ce que la commande contient réellement."
 
-#: \dahu-weight-shipping.php:230
+#: dahu-weight-shipping.php:239
 msgid "The weight that is priced"
 msgstr "Le poids qui est tarifé"
 
-#: \includes\order-screen.php:121
+#: includes/order-screen.php:135
 msgid "This is exactly the weight that enters the price grid, kit and bundle rules included."
 msgstr "C’est exactement le poids qui entre dans la grille de prix, règles des kits et des lots comprises."
 
-#: \dahu-weight-shipping.php:231
+#: dahu-weight-shipping.php:240
 msgid "This is the weight that enters the price grid."
 msgstr "C'est ce poids qui entre dans la grille tarifaire."
 
-#: \includes\calculators.php:203
+#: includes/calculators.php:203
 msgid "This line is not attached to any shipping zone instance, so its price cannot be worked out. Delete it and add it again with \"Add shipping\", or type the price in by hand."
 msgstr "Cette ligne n’est rattachée à aucune instance de zone de livraison : son prix ne peut pas être calculé. Supprimez-la et ajoutez-la de nouveau avec « Ajouter la livraison », ou saisissez le prix à la main."
 
-#: \includes\calculators.php:234
+#: includes/calculators.php:234
 msgid "This method does not apply to what this order contains, because of its required or excluded shipping classes. The price has been left alone."
 msgstr "Cette méthode ne s’applique pas à ce que contient cette commande, du fait de ses classes de livraison exigées ou exclues. Le prix a été laissé tel quel."
 
-#: \includes\shipping-method.php:229
+#: includes/shipping-method.php:229
 msgid "This method will NOT be offered when any product in the cart carries one of these classes. Use it to route a cart to another carrier rather than to price it here."
 msgstr "Cette méthode NE sera PAS proposée si un produit du panier porte l’une de ces classes. À utiliser pour orienter un panier vers un autre transporteur plutôt que pour le tarifer ici."
 
-#: \includes\shipping-method.php:304
+#: includes/shipping-method.php:304
 msgid "This shop has no shipping class yet, so there is nothing to price here. Shipping classes are created under Products, and every rule above works from them."
 msgstr "Cette boutique n’a encore aucune classe de livraison : il n’y a donc rien à tarifer ici. Les classes de livraison se créent sous Produits, et toutes les règles ci-dessus s’appuient sur elles."
 
-#: \includes\shipping-method.php:182
+#: includes/shipping-method.php:182
 msgid "Title"
 msgstr "Titre"
 
-#: \includes\shipping-method.php:184
+#: includes/shipping-method.php:184
 msgid "Title shown to the customer during checkout. Some label-printing services pick the carrier from this text, so it is worth naming the carrier in it."
 msgstr "Titre affiché au client lors de la commande. Certains services d’impression d’étiquettes déduisent le transporteur de ce texte : il vaut mieux l’y nommer."
 
-#: \includes\shipping-method.php:291
+#: includes/shipping-method.php:291
 msgid "Title shown to the customer when the shipment is free. Leave empty to always use the standard title."
 msgstr "Titre affiché au client quand l’envoi est offert. Laissez vide pour toujours employer le titre standard."
 
-#: \includes\shipping-method.php:289
+#: includes/shipping-method.php:289
 msgid "Title when free"
 msgstr "Titre quand c’est offert"
 
-#: \dahu-weight-shipping.php:193
+#: dahu-weight-shipping.php:202
 msgid "Visible on the order"
 msgstr "Visible sur la commande"
 
-#: \includes\shipping-method.php:202 \includes\shipping-method.php:342 \includes\shipping-method.php:350
+#: includes/shipping-method.php:202 includes/shipping-method.php:342 includes/shipping-method.php:350
 msgid "Weight price grid"
 msgstr "Grille de prix au poids"
 
-#: \dahu-weight-shipping.php:170
+#: dahu-weight-shipping.php:170
 msgid "Weight shipping"
 msgstr "Poids et expédition"
 
-#: \includes\shipping-method.php:109
+#: includes/shipping-method.php:109
 msgid "Weight-based shipping"
 msgstr "Livraison au poids"
 
-#: \includes\shipping-method.php:282
+#: includes/shipping-method.php:282
 msgid "When ticked, the WHOLE order ships free as soon as one product carries a class earning free shipping, even if the others do not. Unticked, only an order made up exclusively of those classes ships free."
 msgstr "Si la case est cochée, TOUTE la commande part gratuitement dès qu’un produit porte une classe donnant droit à la gratuité, même si les autres n’en portent pas. Décochée, seule une commande composée exclusivement de ces classes part gratuitement."
 
-#: \includes\shipping-method.php:263
+#: includes/shipping-method.php:263
 msgid "When ticked, this method costs nothing whatever the cart holds. The grid and the class costs are still read, and still ignored."
 msgstr "Si la case est cochée, cette méthode ne coûte rien quel que soit le contenu du panier. La grille et les coûts par classe sont toujours lus, et toujours ignorés."
 
-#: \includes\shipping-method.php:192
+#: includes/shipping-method.php:192
 msgid "Whether tax applies to the calculated shipping cost."
 msgstr "Si la TVA s’applique au coût de livraison calculé."
 
-#: \includes\shipping-method.php:219
+#: includes/shipping-method.php:219
 msgid "With one or more classes selected, this method only appears when the cart holds at least one product in one of them. That is how an instance gets dedicated to one kind of product. Leave empty for no condition."
 msgstr "Avec une ou plusieurs classes sélectionnées, cette méthode n’apparaît que si le panier contient au moins un produit de l’une d’elles. C’est ainsi qu’une instance se dédie à un type de produit. Laissez vide pour n’imposer aucune condition."
 
-#: \dahu-weight-shipping.php:221
+#: dahu-weight-shipping.php:230
 msgid "Worked out from the lines of this order."
 msgstr "Calculé à partir des lignes de cette commande."
 
-#: \includes\order-screen.php:230
+#: includes/order-screen.php:246
 msgid "Working out the shipping cost…"
 msgstr "Calcul du coût de livraison…"
 
-#: \dahu-weight-shipping.php:185
+#: dahu-weight-shipping.php:194
 msgid "You are not allowed to view this page."
 msgstr "Vous n’avez pas l’autorisation de voir cette page."
 
-#: \includes\order-ajax.php:34
+#: includes/order-ajax.php:34
 msgid "You do not have permission to do that."
 msgstr "Vous n’avez pas l’autorisation de faire cela."
 
-#: \includes\order-screen.php:227
+#: includes/order-screen.php:243
 msgid "Zone: %s"
 msgstr "Zone : %s"
 
-#: \includes\calculators.php:165
+#: includes/calculators.php:165
 msgid "cost brought down to zero by a free-shipping coupon"
 msgstr "coût ramené à zéro par un code promo de livraison offerte"
 
-#: \includes\shipping-method.php:351
+#: includes/shipping-method.php:351
 msgid "no valid bracket was found, so the previous grid has been kept."
 msgstr "aucune tranche valable n’a été trouvée, la grille précédente a donc été conservée."
 
-#: \dahu-weight-shipping.php:184
+#: dahu-weight-shipping.php:193
 msgid "of"
 msgstr "sur"
 
-#: \includes\order-screen.php:226
+#: includes/order-screen.php:242
 msgid "price typed in by hand"
 msgstr "prix saisi à la main"
 
-#: \includes\order-screen.php:225
+#: includes/order-screen.php:241
 msgid "priced automatically"
 msgstr "tarifée automatiquement"
 

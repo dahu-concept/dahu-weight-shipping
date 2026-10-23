@@ -36,6 +36,18 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
  */
 function dahu_weight_shipping_uninstall_site() {
 
+	// The welcome screen's own three flags.
+	//
+	// They are interface state, not the shop's data, which is why they sit
+	// BEFORE any “remove data on uninstall” guard: whatever a shop chose to
+	// keep, a reinstall has to greet it again. `includes/dahu-welcome.php`
+	// writes them with update_option(), so they outlive the plugin unless
+	// they are deleted here — and the welcome screen and the guided tour
+	// would then stay silent for good, with nothing on screen to explain why.
+	delete_option( 'dahu_welcome_seen_dahu-weight-shipping' );
+	delete_option( 'dahu_welcome_pending_dahu-weight-shipping' );
+	delete_option( 'dahu_welcome_tour_dahu-weight-shipping' );
+
 	if ( ! get_option( 'dahu_weight_shipping_remove_data_on_uninstall' ) ) {
 		return;
 	}
@@ -59,7 +71,22 @@ dahu_weight_shipping_uninstall_site();
  */
 if ( is_multisite() ) {
 
-	foreach ( get_sites( array( 'fields' => 'ids' ) ) as $site_id ) {
+	/*
+	 * `number => 0` for every site, not the first hundred: WP_Site_Query's
+	 * own default caps the list at a hundred, and a network larger than that
+	 * would keep this plugin's flags on every site past the cap — the welcome
+	 * screen and the tour then stay silent for good there, with nothing on
+	 * screen to explain why.
+	 */
+	$site_ids = get_sites(
+		array(
+			'fields'        => 'ids',
+			'number'        => 0,
+			'no_found_rows' => true,
+		)
+	);
+
+	foreach ( $site_ids as $site_id ) {
 		switch_to_blog( $site_id );
 		dahu_weight_shipping_uninstall_site();
 		restore_current_blog();

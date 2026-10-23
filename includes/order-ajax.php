@@ -72,6 +72,29 @@ function dahu_weight_shipping_request_shipping_item( $order ) {
 	return $item;
 }
 
+/**
+ * Does this zone instance still exist?
+ *
+ * Asked of WooCommerce's own lookup, which reads the instance from the
+ * database and returns false for one that has been deleted. ANY method's
+ * instance counts: a method this plugin cannot price is still offered in the
+ * picker, so an existence check narrowed to this plugin's own method would
+ * refuse a perfectly good line.
+ *
+ * @param int $instance_id Zone instance id.
+ * @return bool
+ */
+function dahu_weight_shipping_zone_instance_exists( $instance_id ) {
+
+	$instance_id = absint( $instance_id );
+
+	if ( ! $instance_id || ! class_exists( 'WC_Shipping_Zones' ) ) {
+		return false;
+	}
+
+	return (bool) WC_Shipping_Zones::get_shipping_method( $instance_id );
+}
+
 /* -------------------------------------------------------------------------
  * The manual-cost lock
  * ---------------------------------------------------------------------- */
@@ -266,6 +289,30 @@ function dahu_weight_shipping_ajax_set_instance() {
 
 	if ( ! $instance_id ) {
 		wp_send_json_error( array( 'message' => __( 'No shipping zone instance was given.', 'dahu-weight-shipping' ) ) );
+	}
+
+	/*
+	 * The instance has to still exist in a zone, and that is checked BEFORE it
+	 * is written to the line.
+	 *
+	 * The browser sends an instance id it read when the page was opened, or
+	 * prefetched before that. An instance deleted from its zone in between
+	 * leaves that id pointing at nothing, and writing it anyway binds the line
+	 * to a dead instance for good: nothing can price it afterwards, and no
+	 * screen says which instance it is waiting for. The same shape of failure
+	 * has been seen in production elsewhere, where a deleted instance made a
+	 * shipping price fall back to a grid nobody had configured.
+	 *
+	 * Refused instead, with the one instruction that resolves it. Nothing is
+	 * written, so the line stays as WooCommerce created it and can be attached
+	 * again once the picker has been reloaded.
+	 */
+	if ( ! dahu_weight_shipping_zone_instance_exists( $instance_id ) ) {
+		wp_send_json_error(
+			array(
+				'message' => __( 'That shipping zone instance no longer exists: it has been removed from its zone since this screen was opened. Reload the order and add the shipping line again.', 'dahu-weight-shipping' ),
+			)
+		);
 	}
 
 	$item->set_instance_id( $instance_id );

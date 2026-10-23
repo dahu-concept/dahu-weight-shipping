@@ -432,6 +432,17 @@
 	 */
 	function applyCostResponse( $row, response ) {
 		if ( ! response || ! response.success || ! response.data ) {
+			// A refusal from the server carries the sentence that says what to
+			// do, and it has to reach the screen. Dropping it left the one
+			// case that matters silent: a zone instance deleted since the page
+			// was opened produced no price, no message, and a cost field the
+			// shop manager believed had been filled in. A money field that
+			// stays as it was without a word is the failure this says out
+			// loud.
+			if ( response && response.data && response.data.message ) {
+				notice( response.data.message, 'warning', { persist: true } );
+			}
+
 			return 'error';
 		}
 
@@ -775,6 +786,17 @@
 				 * zone, or delete the line.
 				 */
 				if ( 'no_rate' === outcome ) {
+					return;
+				}
+
+				/*
+				 * error: the server refused — a dead zone instance, an order
+				 * that moved. Nothing was written, so WooCommerce's own
+				 * "Recalculate" would rebuild the items panel on top of the
+				 * message explaining why, and leave a line looking finished at
+				 * whatever the field already held.
+				 */
+				if ( 'error' === outcome ) {
 					return;
 				}
 

@@ -97,9 +97,9 @@ function dahu_weight_shipping_render_weight_panel( $post_or_order ) {
 
 	$order = ( $post_or_order instanceof WC_Order ) ? $post_or_order : wc_get_order( $post_or_order->ID );
 
-	$weight = $order
-		? dahu_weight_shipping_order_total_weight( dahu_weight_shipping_collect_items_with_live_qty( $order ) )
-		: 0;
+	$items = $order ? dahu_weight_shipping_collect_items_with_live_qty( $order ) : array();
+
+	$weight = $order ? dahu_weight_shipping_order_total_weight( $items ) : 0;
 
 	$unit = get_option( 'woocommerce_weight_unit', 'kg' );
 
@@ -118,7 +118,23 @@ function dahu_weight_shipping_render_weight_panel( $post_or_order ) {
 			</button>
 		</p>
 		<p class="dahu-ws-panel__note">
-			<?php esc_html_e( 'This is exactly the weight that enters the price grid, kit and bundle rules included.', 'dahu-weight-shipping' ); ?>
+			<?php
+			/*
+			 * A new order has no lines yet, and the panel's own sentence is
+			 * about a weight that does not exist: a bold 0 under "this is
+			 * exactly the weight that enters the price grid" reads as a
+			 * figure that failed to arrive rather than as an order nobody has
+			 * filled in. "No line has a weight" is a different nothing and
+			 * keeps the usual sentence, because there the figure is true.
+			 */
+			if ( ! $items ) {
+				echo '<span class="dahu-ui-hint">'
+					. esc_html__( 'No items on this order yet: the weight appears as soon as you add one.', 'dahu-weight-shipping' )
+					. '</span>';
+			} else {
+				esc_html_e( 'This is exactly the weight that enters the price grid, kit and bundle rules included.', 'dahu-weight-shipping' );
+			}
+			?>
 		</p>
 	</div>
 	<?php

@@ -3,7 +3,7 @@
  * Plugin Name:       Dahu Weight Shipping
  * Plugin URI:        https://dahu-concept.fr
  * Description:       A weight-based WooCommerce shipping method configurable per zone, with a per-zone price grid, shipping-class rules, and one-click shipping lines on manually created orders.
- * Version:           1.0.0
+ * Version:           1.1.1
  * Author:            Hugo Vial-Jaime
  * Author URI:        mailto:contact@dahu-concept.fr
  * License:           MIT
@@ -19,7 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'DAHU_WEIGHT_SHIPPING_VERSION', '1.0.0' );
+define( 'DAHU_WEIGHT_SHIPPING_VERSION', '1.1.1' );
 define( 'DAHU_WEIGHT_SHIPPING_FILE', __FILE__ );
 define( 'DAHU_WEIGHT_SHIPPING_PATH', plugin_dir_path( __FILE__ ) );
 define( 'DAHU_WEIGHT_SHIPPING_URL', plugin_dir_url( __FILE__ ) );
@@ -172,10 +172,19 @@ add_action(
 				'file'       => DAHU_WEIGHT_SHIPPING_FILE,
 				'version'    => DAHU_WEIGHT_SHIPPING_VERSION,
 				'textdomain' => 'dahu-weight-shipping',
+				'mark'       => array(
+					'view'  => '0 0 112 112',
+					'paths' => array(
+						'M56 18 L56 96 M26 96 L86 96',
+						'M12 36 L100 36',
+						'M12 36 L2 62 Q12 72 22 62 Z M100 36 L90 62 Q100 72 110 62 Z',
+						'M43.0 2.0 H69.0 A5.0 5.0 0 0 1 74.0 7.0 V19.0 A5.0 5.0 0 0 1 69.0 24.0 H43.0 A5.0 5.0 0 0 1 38.0 19.0 V7.0 A5.0 5.0 0 0 1 43.0 2.0 Z',
+					),
+				),
 				/*
-				 * Les mots de l'accueil viennent d'ici : le fichier partagé est
-				 * recopié dans toute la famille et ne peut donc porter aucun
-				 * domaine de traduction.
+				 * The welcome screen's words come from here: the shared file is
+				 * copied byte for byte across the whole family, so it can carry
+				 * no text domain of its own.
 				 */
 				'strings'    => array(
 					'next'   => __( 'Next', 'dahu-weight-shipping' ),
