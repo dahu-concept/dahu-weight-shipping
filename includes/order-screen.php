@@ -240,6 +240,7 @@ function dahu_weight_shipping_enqueue_order_assets() {
 				'chooseMethod'     => __( 'Choose a shipping method', 'dahu-weight-shipping' ),
 				'autoPriced'       => __( 'priced automatically', 'dahu-weight-shipping' ),
 				'manualPriced'     => __( 'price typed in by hand', 'dahu-weight-shipping' ),
+				/* translators: %s: shipping zone name. */
 				'zoneLabel'        => __( 'Zone: %s', 'dahu-weight-shipping' ),
 				'creatingLine'     => __( 'Creating the shipping line…', 'dahu-weight-shipping' ),
 				'loadingMethods'   => __( 'Loading the shipping methods…', 'dahu-weight-shipping' ),

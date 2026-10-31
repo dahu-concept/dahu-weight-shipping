@@ -1,5 +1,5 @@
 === Dahu Weight Shipping ===
-Contributors: hugovialjaime
+Contributors: dahuconcept
 Tags: woocommerce, shipping, weight, shipping zones, shipping classes
 Requires at least: 6.0
 Tested up to: 7.1

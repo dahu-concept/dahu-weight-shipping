@@ -5,7 +5,7 @@
  * Description:       A weight-based WooCommerce shipping method configurable per zone, with a per-zone price grid, shipping-class rules, and one-click shipping lines on manually created orders.
  * Version:           1.1.2
  * Author:            Hugo Vial-Jaime
- * Author URI:        mailto:contact@dahu-concept.fr
+ * Author URI:        https://dahu-concept.fr
  * License:           MIT
  * License URI:       https://opensource.org/licenses/MIT
  * Text Domain:       dahu-weight-shipping
