@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: dahu-weight-shipping\n"
+"Project-Id-Version: ubac-shipping\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,11 +50,11 @@ msgstr "Classes exclues de la grille au poids"
 msgid "Classes that cancel the weight grid"
 msgstr "Classes qui annulent la grille au poids"
 
-#: dahu-weight-shipping.php:235
+#: ubac-shipping.php:235
 msgid "Click it once the quantities have changed."
 msgstr "Cliquez une fois les quantités changées."
 
-#: dahu-weight-shipping.php:198
+#: ubac-shipping.php:198
 msgid "Computed from the lines"
 msgstr "Calculé depuis les lignes"
 
@@ -74,7 +74,7 @@ msgstr "Création de la ligne de livraison…"
 msgid "Dismiss"
 msgstr "Ignorer"
 
-#: dahu-weight-shipping.php:191
+#: ubac-shipping.php:191
 msgid "Done"
 msgstr "Terminé"
 
@@ -94,7 +94,7 @@ msgstr "Livraison offerte"
 msgid "Hide if the cart contains"
 msgstr "Masquer si le panier contient"
 
-#: dahu-weight-shipping.php:171
+#: ubac-shipping.php:171
 msgid "Keeps the order weight right, so the shipping price is too."
 msgstr "Garde le poids de la commande juste, donc le prix d’expédition aussi."
 
@@ -112,7 +112,7 @@ msgstr "Ligne %1$d ignorée (« %2$s ») : le poids maximum doit être supérieu
 msgid "Loading the shipping methods…"
 msgstr "Chargement des méthodes de livraison…"
 
-#: dahu-weight-shipping.php:190
+#: ubac-shipping.php:190
 msgid "Next"
 msgstr "Suivant"
 
@@ -136,7 +136,7 @@ msgstr "Aucune instance de zone de livraison n’a été fournie."
 msgid "One bracket per line, as <code>min-max:price</code> — for example <code>0-2:18</code>. Weights in the shop's weight unit, prices excluding tax. The minimum is EXCLUDED from the bracket and the maximum INCLUDED, so \"0-2:18\" covers anything above 0 and up to 2. Past the last bracket, that bracket's price applies. This grid belongs to this zone only."
 msgstr "Une tranche par ligne, sous la forme <code>min-max:prix</code> — par exemple <code>0-2:18</code>. Poids dans l’unité de poids de la boutique, prix hors taxes. Le minimum est EXCLU de la tranche et le maximum INCLUS : « 0-2:18 » couvre donc tout ce qui dépasse 0 et va jusqu’à 2. Au-delà de la dernière tranche, c’est son prix qui s’applique. Cette grille n’appartient qu’à cette zone."
 
-#: dahu-weight-shipping.php:207
+#: ubac-shipping.php:207
 msgid "One button when the order changed."
 msgstr "Un bouton quand la commande a changé."
 
@@ -168,7 +168,7 @@ msgstr "Les produits de ces classes n’apportent jamais leur poids à la grille
 msgid "Quantities have changed on screen, so this weight is out of date."
 msgstr "Les quantités ont changé à l’écran : ce poids n’est plus à jour."
 
-#: dahu-weight-shipping.php:206
+#: ubac-shipping.php:206
 msgid "Recalculated on demand"
 msgstr "Recalculé à la demande"
 
@@ -176,7 +176,7 @@ msgstr "Recalculé à la demande"
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: dahu-weight-shipping.php:234
+#: ubac-shipping.php:234
 msgid "Refresh after edits"
 msgstr "Rafraîchissez après modification"
 
@@ -200,7 +200,7 @@ msgstr "Ligne de livraison introuvable."
 msgid "Shipping weight"
 msgstr "Poids d’expédition"
 
-#: dahu-weight-shipping.php:116
+#: ubac-shipping.php:116
 msgid "Shipping zones"
 msgstr "Zones de livraison"
 
@@ -208,15 +208,15 @@ msgstr "Zones de livraison"
 msgid "Show only if the cart contains"
 msgstr "N’afficher que si le panier contient"
 
-#: dahu-weight-shipping.php:203
+#: ubac-shipping.php:203
 msgid "Shown where somebody packing can check it."
 msgstr "Affiché là où la personne qui emballe peut le vérifier."
 
-#: dahu-weight-shipping.php:192
+#: ubac-shipping.php:192
 msgid "Skip"
 msgstr "Passer"
 
-#: dahu-weight-shipping.php:134
+#: ubac-shipping.php:134
 msgid "Support"
 msgstr "Assistance"
 
@@ -241,7 +241,7 @@ msgstr "Cette instance de zone d'expédition n'existe plus : elle a été retir�
 msgid "The calculator for this shipping method returned nothing usable."
 msgstr "Le calculateur de cette méthode de livraison n’a rien renvoyé d’exploitable."
 
-#: dahu-weight-shipping.php:229
+#: ubac-shipping.php:229
 msgid "The order weight"
 msgstr "Le poids de la commande"
 
@@ -253,11 +253,11 @@ msgstr "Le prix de cette méthode de livraison doit être saisi à la main."
 msgid "The shipping methods could not be loaded. Check the connection and try again."
 msgstr "Les méthodes de livraison n’ont pas pu être chargées. Vérifiez la connexion et réessayez."
 
-#: dahu-weight-shipping.php:199
+#: ubac-shipping.php:199
 msgid "The weight follows what is actually in the order."
 msgstr "Le poids suit ce que la commande contient réellement."
 
-#: dahu-weight-shipping.php:239
+#: ubac-shipping.php:239
 msgid "The weight that is priced"
 msgstr "Le poids qui est tarifé"
 
@@ -265,7 +265,7 @@ msgstr "Le poids qui est tarifé"
 msgid "This is exactly the weight that enters the price grid, kit and bundle rules included."
 msgstr "C’est exactement le poids qui entre dans la grille de prix, règles des kits et des lots comprises."
 
-#: dahu-weight-shipping.php:240
+#: ubac-shipping.php:240
 msgid "This is the weight that enters the price grid."
 msgstr "C'est ce poids qui entre dans la grille tarifaire."
 
@@ -301,7 +301,7 @@ msgstr "Titre affiché au client quand l’envoi est offert. Laissez vide pour t
 msgid "Title when free"
 msgstr "Titre quand c’est offert"
 
-#: dahu-weight-shipping.php:202
+#: ubac-shipping.php:202
 msgid "Visible on the order"
 msgstr "Visible sur la commande"
 
@@ -309,7 +309,7 @@ msgstr "Visible sur la commande"
 msgid "Weight price grid"
 msgstr "Grille de prix au poids"
 
-#: dahu-weight-shipping.php:170
+#: ubac-shipping.php:170
 msgid "Weight shipping"
 msgstr "Poids et expédition"
 
@@ -333,7 +333,7 @@ msgstr "Si la TVA s’applique au coût de livraison calculé."
 msgid "With one or more classes selected, this method only appears when the cart holds at least one product in one of them. That is how an instance gets dedicated to one kind of product. Leave empty for no condition."
 msgstr "Avec une ou plusieurs classes sélectionnées, cette méthode n’apparaît que si le panier contient au moins un produit de l’une d’elles. C’est ainsi qu’une instance se dédie à un type de produit. Laissez vide pour n’imposer aucune condition."
 
-#: dahu-weight-shipping.php:230
+#: ubac-shipping.php:230
 msgid "Worked out from the lines of this order."
 msgstr "Calculé à partir des lignes de cette commande."
 
@@ -341,7 +341,7 @@ msgstr "Calculé à partir des lignes de cette commande."
 msgid "Working out the shipping cost…"
 msgstr "Calcul du coût de livraison…"
 
-#: dahu-weight-shipping.php:194
+#: ubac-shipping.php:194
 msgid "You are not allowed to view this page."
 msgstr "Vous n’avez pas l’autorisation de voir cette page."
 
@@ -361,7 +361,7 @@ msgstr "coût ramené à zéro par un code promo de livraison offerte"
 msgid "no valid bracket was found, so the previous grid has been kept."
 msgstr "aucune tranche valable n’a été trouvée, la grille précédente a donc été conservée."
 
-#: dahu-weight-shipping.php:193
+#: ubac-shipping.php:193
 msgid "of"
 msgstr "sur"
 

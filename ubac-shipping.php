@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name:       Dahu Weight Shipping
+ * Plugin Name:       Ubac Weight Shipping
  * Description:       A weight-based WooCommerce shipping method configurable per zone, with a per-zone price grid, shipping-class rules, and one-click shipping lines on manually created orders.
  * Version:           1.1.2
  * Author:            Hugo Vial-Jaime
  * Author URI:        https://dahu-concept.fr
  * License:           MIT
  * License URI:       https://opensource.org/licenses/MIT
- * Text Domain:       dahu-weight-shipping
+ * Text Domain:       ubac-shipping
  * Domain Path:       /languages
  * Requires at least: 6.0
  * Requires PHP:      7.4
@@ -108,7 +108,7 @@ add_filter(
 		$page = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( dahu_weight_shipping_settings_url() ),
-			esc_html__( 'Shipping zones', 'dahu-weight-shipping' )
+			esc_html__( 'Shipping zones', 'ubac-shipping' )
 		);
 		array_unshift( $links, $page );
 		return $links;
@@ -126,7 +126,7 @@ add_filter(
 		$links[] = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( 'https://dahu-concept.fr' ),
-			esc_html__( 'Support', 'dahu-weight-shipping' )
+			esc_html__( 'Support', 'ubac-shipping' )
 		);
 
 		return $links;
@@ -162,8 +162,8 @@ add_action(
 		Dahu_Welcome::register(
 			array(
 				'slug'       => 'dahu-weight-shipping',
-				'name'       => __( 'Weight shipping', 'dahu-weight-shipping' ),
-				'tagline'    => __( 'Keeps the order weight right, so the shipping price is too.', 'dahu-weight-shipping' ),
+				'name'       => __( 'Weight shipping', 'ubac-shipping' ),
+				'tagline'    => __( 'Keeps the order weight right, so the shipping price is too.', 'ubac-shipping' ),
 				'file'       => DAHU_WEIGHT_SHIPPING_FILE,
 				'version'    => DAHU_WEIGHT_SHIPPING_VERSION,
 				'textdomain' => 'dahu-weight-shipping',
@@ -182,24 +182,24 @@ add_action(
 				 * no text domain of its own.
 				 */
 				'strings'    => array(
-					'next'   => __( 'Next', 'dahu-weight-shipping' ),
-					'done'   => __( 'Done', 'dahu-weight-shipping' ),
-					'skip'   => __( 'Skip', 'dahu-weight-shipping' ),
-					'of'     => __( 'of', 'dahu-weight-shipping' ),
-					'denied' => __( 'You are not allowed to view this page.', 'dahu-weight-shipping' ),
+					'next'   => __( 'Next', 'ubac-shipping' ),
+					'done'   => __( 'Done', 'ubac-shipping' ),
+					'skip'   => __( 'Skip', 'ubac-shipping' ),
+					'of'     => __( 'of', 'ubac-shipping' ),
+					'denied' => __( 'You are not allowed to view this page.', 'ubac-shipping' ),
 				),
 				'points'     => array(
 				array(
-					'title' => __( 'Computed from the lines', 'dahu-weight-shipping' ),
-					'text'  => __( 'The weight follows what is actually in the order.', 'dahu-weight-shipping' ),
+					'title' => __( 'Computed from the lines', 'ubac-shipping' ),
+					'text'  => __( 'The weight follows what is actually in the order.', 'ubac-shipping' ),
 				),
 				array(
-					'title' => __( 'Visible on the order', 'dahu-weight-shipping' ),
-					'text'  => __( 'Shown where somebody packing can check it.', 'dahu-weight-shipping' ),
+					'title' => __( 'Visible on the order', 'ubac-shipping' ),
+					'text'  => __( 'Shown where somebody packing can check it.', 'ubac-shipping' ),
 				),
 				array(
-					'title' => __( 'Recalculated on demand', 'dahu-weight-shipping' ),
-					'text'  => __( 'One button when the order changed.', 'dahu-weight-shipping' ),
+					'title' => __( 'Recalculated on demand', 'ubac-shipping' ),
+					'text'  => __( 'One button when the order changed.', 'ubac-shipping' ),
 				),
 				),
 
@@ -221,18 +221,18 @@ add_action(
 				'tour'        => array(
 					array(
 						'selector' => '#dahu-ws-weight-value',
-						'title'    => __( 'The order weight', 'dahu-weight-shipping' ),
-						'text'     => __( 'Worked out from the lines of this order.', 'dahu-weight-shipping' ),
+						'title'    => __( 'The order weight', 'ubac-shipping' ),
+						'text'     => __( 'Worked out from the lines of this order.', 'ubac-shipping' ),
 					),
 					array(
 						'selector' => '#dahu-ws-weight-refresh',
-						'title'    => __( 'Refresh after edits', 'dahu-weight-shipping' ),
-						'text'     => __( 'Click it once the quantities have changed.', 'dahu-weight-shipping' ),
+						'title'    => __( 'Refresh after edits', 'ubac-shipping' ),
+						'text'     => __( 'Click it once the quantities have changed.', 'ubac-shipping' ),
 					),
 					array(
 						'selector' => '.dahu-ws-panel__note',
-						'title'    => __( 'The weight that is priced', 'dahu-weight-shipping' ),
-						'text'     => __( 'This is the weight that enters the price grid.', 'dahu-weight-shipping' ),
+						'title'    => __( 'The weight that is priced', 'ubac-shipping' ),
+						'text'     => __( 'This is the weight that enters the price grid.', 'ubac-shipping' ),
 					),
 				),
 			)

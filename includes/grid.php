@@ -140,7 +140,7 @@ function dahu_weight_shipping_parse_grid( $text, &$errors = array() ) {
 		if ( ! preg_match( $pattern, $line, $matches ) ) {
 			$errors[] = sprintf(
 				/* translators: 1: line number, 2: the rejected line as typed. */
-				__( 'Line %1$d ignored ("%2$s"): the expected format is "min-max:price", for example "0-2:18".', 'dahu-weight-shipping' ),
+				__( 'Line %1$d ignored ("%2$s"): the expected format is "min-max:price", for example "0-2:18".', 'ubac-shipping' ),
 				$number + 1,
 				$line
 			);
@@ -154,7 +154,7 @@ function dahu_weight_shipping_parse_grid( $text, &$errors = array() ) {
 		if ( $max <= $min ) {
 			$errors[] = sprintf(
 				/* translators: 1: line number, 2: the rejected line as typed. */
-				__( 'Line %1$d ignored ("%2$s"): the maximum weight must be greater than the minimum weight.', 'dahu-weight-shipping' ),
+				__( 'Line %1$d ignored ("%2$s"): the maximum weight must be greater than the minimum weight.', 'ubac-shipping' ),
 				$number + 1,
 				$line
 			);

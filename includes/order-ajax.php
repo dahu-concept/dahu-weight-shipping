@@ -31,7 +31,7 @@ function dahu_weight_shipping_check_request() {
 	check_ajax_referer( DAHU_WEIGHT_SHIPPING_NONCE, 'nonce' );
 
 	if ( ! current_user_can( 'manage_woocommerce' ) ) {
-		wp_send_json_error( array( 'message' => __( 'You do not have permission to do that.', 'dahu-weight-shipping' ) ) );
+		wp_send_json_error( array( 'message' => __( 'You do not have permission to do that.', 'ubac-shipping' ) ) );
 	}
 }
 
@@ -47,7 +47,7 @@ function dahu_weight_shipping_request_order() {
 	$order    = $order_id ? wc_get_order( $order_id ) : false;
 
 	if ( ! $order ) {
-		wp_send_json_error( array( 'message' => __( 'Order not found.', 'dahu-weight-shipping' ) ) );
+		wp_send_json_error( array( 'message' => __( 'Order not found.', 'ubac-shipping' ) ) );
 	}
 
 	return $order;
@@ -66,7 +66,7 @@ function dahu_weight_shipping_request_shipping_item( $order ) {
 	$item    = $item_id ? $order->get_item( $item_id ) : false;
 
 	if ( ! $item || ! is_a( $item, 'WC_Order_Item_Shipping' ) ) {
-		wp_send_json_error( array( 'message' => __( 'Shipping line not found.', 'dahu-weight-shipping' ) ) );
+		wp_send_json_error( array( 'message' => __( 'Shipping line not found.', 'ubac-shipping' ) ) );
 	}
 
 	return $item;
@@ -288,7 +288,7 @@ function dahu_weight_shipping_ajax_set_instance() {
 	$method_title = isset( $_POST['method_title'] ) ? sanitize_text_field( wp_unslash( $_POST['method_title'] ) ) : '';
 
 	if ( ! $instance_id ) {
-		wp_send_json_error( array( 'message' => __( 'No shipping zone instance was given.', 'dahu-weight-shipping' ) ) );
+		wp_send_json_error( array( 'message' => __( 'No shipping zone instance was given.', 'ubac-shipping' ) ) );
 	}
 
 	/*
@@ -310,7 +310,7 @@ function dahu_weight_shipping_ajax_set_instance() {
 	if ( ! dahu_weight_shipping_zone_instance_exists( $instance_id ) ) {
 		wp_send_json_error(
 			array(
-				'message' => __( 'That shipping zone instance no longer exists: it has been removed from its zone since this screen was opened. Reload the order and add the shipping line again.', 'dahu-weight-shipping' ),
+				'message' => __( 'That shipping zone instance no longer exists: it has been removed from its zone since this screen was opened. Reload the order and add the shipping line again.', 'ubac-shipping' ),
 			)
 		);
 	}
@@ -399,7 +399,7 @@ function dahu_weight_shipping_ajax_zone_methods() {
 		if ( '' === trim( $title ) ) {
 			$title = sprintf(
 				/* translators: 1: shipping method name, 2: zone instance id. */
-				__( '%1$s #%2$d', 'dahu-weight-shipping' ),
+				__( '%1$s #%2$d', 'ubac-shipping' ),
 				$method->method_title,
 				(int) $method->instance_id
 			);

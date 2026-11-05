@@ -1,4 +1,4 @@
-=== Dahu Weight Shipping ===
+=== Ubac Weight Shipping ===
 Contributors: dahuconcept
 Tags: weight shipping, table rate, shipping zones, shipping class, shipping
 Requires at least: 6.0

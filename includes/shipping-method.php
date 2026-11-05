@@ -106,8 +106,8 @@ function dahu_weight_shipping_method_init() {
 
 			$this->id                 = DAHU_WEIGHT_SHIPPING_METHOD_ID;
 			$this->instance_id        = absint( $instance_id );
-			$this->method_title       = __( 'Weight-based shipping', 'dahu-weight-shipping' );
-			$this->method_description = __( 'Prices a shipment from the real weight of the cart, using a price grid belonging to this zone, with per-class rules for flat costs, free shipping and exclusions.', 'dahu-weight-shipping' );
+			$this->method_title       = __( 'Weight-based shipping', 'ubac-shipping' );
+			$this->method_description = __( 'Prices a shipment from the real weight of the cart, using a price grid belonging to this zone, with per-class rules for flat costs, free shipping and exclusions.', 'ubac-shipping' );
 			$this->supports           = array(
 				'shipping-zones',
 				'instance-settings',
@@ -179,135 +179,135 @@ function dahu_weight_shipping_method_init() {
 			$fields = array(
 
 				'title'                  => array(
-					'title'       => __( 'Title', 'dahu-weight-shipping' ),
+					'title'       => __( 'Title', 'ubac-shipping' ),
 					'type'        => 'text',
-					'description' => __( 'Title shown to the customer during checkout. Some label-printing services pick the carrier from this text, so it is worth naming the carrier in it.', 'dahu-weight-shipping' ),
-					'default'     => __( 'Shipping', 'dahu-weight-shipping' ),
+					'description' => __( 'Title shown to the customer during checkout. Some label-printing services pick the carrier from this text, so it is worth naming the carrier in it.', 'ubac-shipping' ),
+					'default'     => __( 'Shipping', 'ubac-shipping' ),
 					'desc_tip'    => true,
 				),
 
 				'tax_status'             => array(
-					'title'       => __( 'Tax status', 'dahu-weight-shipping' ),
+					'title'       => __( 'Tax status', 'ubac-shipping' ),
 					'type'        => 'select',
-					'description' => __( 'Whether tax applies to the calculated shipping cost.', 'dahu-weight-shipping' ),
+					'description' => __( 'Whether tax applies to the calculated shipping cost.', 'ubac-shipping' ),
 					'options'     => array(
-						'taxable' => __( 'Taxable', 'dahu-weight-shipping' ),
-						'none'    => _x( 'None', 'Tax status', 'dahu-weight-shipping' ),
+						'taxable' => __( 'Taxable', 'ubac-shipping' ),
+						'none'    => _x( 'None', 'Tax status', 'ubac-shipping' ),
 					),
 					'default'     => 'taxable',
 					'desc_tip'    => true,
 				),
 
 				'weight_grid'            => array(
-					'title'       => __( 'Weight price grid', 'dahu-weight-shipping' ),
+					'title'       => __( 'Weight price grid', 'ubac-shipping' ),
 					'type'        => 'textarea',
-					'description' => __( 'One bracket per line, as <code>min-max:price</code> — for example <code>0-2:18</code>. Weights in the shop\'s weight unit, prices excluding tax. The minimum is EXCLUDED from the bracket and the maximum INCLUDED, so "0-2:18" covers anything above 0 and up to 2. Past the last bracket, that bracket\'s price applies. This grid belongs to this zone only.', 'dahu-weight-shipping' ),
+					'description' => __( 'One bracket per line, as <code>min-max:price</code> — for example <code>0-2:18</code>. Weights in the shop\'s weight unit, prices excluding tax. The minimum is EXCLUDED from the bracket and the maximum INCLUDED, so "0-2:18" covers anything above 0 and up to 2. Past the last bracket, that bracket\'s price applies. This grid belongs to this zone only.', 'ubac-shipping' ),
 					'default'     => dahu_weight_shipping_format_grid( dahu_weight_shipping_default_grid() ),
 					'css'         => 'width: 320px; height: 180px; font-family: monospace;',
 				),
 
 				'rules_title'            => array(
-					'title'       => __( 'Shipping class rules', 'dahu-weight-shipping' ),
+					'title'       => __( 'Shipping class rules', 'ubac-shipping' ),
 					'type'        => 'title',
-					'description' => __( 'Each rule below is read from the classes present in the cart. Leaving a field empty disables that rule entirely.', 'dahu-weight-shipping' ),
+					'description' => __( 'Each rule below is read from the classes present in the cart. Leaving a field empty disables that rule entirely.', 'ubac-shipping' ),
 				),
 
 				'required_classes'       => array(
-					'title'       => __( 'Show only if the cart contains', 'dahu-weight-shipping' ),
+					'title'       => __( 'Show only if the cart contains', 'ubac-shipping' ),
 					'type'        => 'multiselect',
 					'class'       => 'wc-enhanced-select',
-					'description' => __( 'With one or more classes selected, this method only appears when the cart holds at least one product in one of them. That is how an instance gets dedicated to one kind of product. Leave empty for no condition.', 'dahu-weight-shipping' ),
+					'description' => __( 'With one or more classes selected, this method only appears when the cart holds at least one product in one of them. That is how an instance gets dedicated to one kind of product. Leave empty for no condition.', 'ubac-shipping' ),
 					'options'     => $class_options,
 					'default'     => array(),
 					'desc_tip'    => true,
 				),
 
 				'excluded_classes'       => array(
-					'title'       => __( 'Hide if the cart contains', 'dahu-weight-shipping' ),
+					'title'       => __( 'Hide if the cart contains', 'ubac-shipping' ),
 					'type'        => 'multiselect',
 					'class'       => 'wc-enhanced-select',
-					'description' => __( 'This method will NOT be offered when any product in the cart carries one of these classes. Use it to route a cart to another carrier rather than to price it here.', 'dahu-weight-shipping' ),
+					'description' => __( 'This method will NOT be offered when any product in the cart carries one of these classes. Use it to route a cart to another carrier rather than to price it here.', 'ubac-shipping' ),
 					'options'     => $class_options,
 					'default'     => array(),
 					'desc_tip'    => true,
 				),
 
 				'flat_rate_classes'      => array(
-					'title'       => __( 'Classes kept out of the weight grid', 'dahu-weight-shipping' ),
+					'title'       => __( 'Classes kept out of the weight grid', 'ubac-shipping' ),
 					'type'        => 'multiselect',
 					'class'       => 'wc-enhanced-select',
-					'description' => __( 'Products in these classes never contribute their weight to the grid. They are billed only through their own flat cost below. This is for goods a separate carrier handles at a contract price — a bulky item on a pallet, for instance — whose weight would otherwise push the rest of the order into a higher bracket.', 'dahu-weight-shipping' ),
+					'description' => __( 'Products in these classes never contribute their weight to the grid. They are billed only through their own flat cost below. This is for goods a separate carrier handles at a contract price — a bulky item on a pallet, for instance — whose weight would otherwise push the rest of the order into a higher bracket.', 'ubac-shipping' ),
 					'options'     => $class_options,
 					'default'     => array(),
 					'desc_tip'    => true,
 				),
 
 				'weight_waiving_classes' => array(
-					'title'       => __( 'Classes that cancel the weight grid', 'dahu-weight-shipping' ),
+					'title'       => __( 'Classes that cancel the weight grid', 'ubac-shipping' ),
 					'type'        => 'multiselect',
 					'class'       => 'wc-enhanced-select',
-					'description' => __( 'As soon as one product in the cart carries one of these classes, NO weight at all enters the grid — not its own, and not that of the items alongside it. Only the flat class costs below are charged. This covers the case of a product whose shipping is already priced into it and which carries whatever ships with it.', 'dahu-weight-shipping' ),
+					'description' => __( 'As soon as one product in the cart carries one of these classes, NO weight at all enters the grid — not its own, and not that of the items alongside it. Only the flat class costs below are charged. This covers the case of a product whose shipping is already priced into it and which carries whatever ships with it.', 'ubac-shipping' ),
 					'options'     => $class_options,
 					'default'     => array(),
 					'desc_tip'    => true,
 				),
 
 				'free_title'             => array(
-					'title' => __( 'Free shipping', 'dahu-weight-shipping' ),
+					'title' => __( 'Free shipping', 'ubac-shipping' ),
 					'type'  => 'title',
 				),
 
 				'always_free'            => array(
-					'title'       => __( 'Always free', 'dahu-weight-shipping' ),
+					'title'       => __( 'Always free', 'ubac-shipping' ),
 					'type'        => 'checkbox',
-					'description' => __( 'When ticked, this method costs nothing whatever the cart holds. The grid and the class costs are still read, and still ignored.', 'dahu-weight-shipping' ),
+					'description' => __( 'When ticked, this method costs nothing whatever the cart holds. The grid and the class costs are still read, and still ignored.', 'ubac-shipping' ),
 					'default'     => 'no',
 					'desc_tip'    => true,
 					'label'       => ' ',
 				),
 
 				'classes_free_shipping'  => array(
-					'title'       => __( 'Classes earning free shipping', 'dahu-weight-shipping' ),
+					'title'       => __( 'Classes earning free shipping', 'ubac-shipping' ),
 					'type'        => 'multiselect',
 					'class'       => 'wc-enhanced-select',
-					'description' => __( 'Products in these classes make the shipment free. Whether that applies to the whole order or only to an order made up of nothing else is the next setting.', 'dahu-weight-shipping' ),
+					'description' => __( 'Products in these classes make the shipment free. Whether that applies to the whole order or only to an order made up of nothing else is the next setting.', 'ubac-shipping' ),
 					'options'     => $class_options,
 					'default'     => array(),
 					'desc_tip'    => true,
 				),
 
 				'free_for_whole_cart'    => array(
-					'title'       => __( 'One such product is enough', 'dahu-weight-shipping' ),
+					'title'       => __( 'One such product is enough', 'ubac-shipping' ),
 					'type'        => 'checkbox',
-					'description' => __( 'When ticked, the WHOLE order ships free as soon as one product carries a class earning free shipping, even if the others do not. Unticked, only an order made up exclusively of those classes ships free.', 'dahu-weight-shipping' ),
+					'description' => __( 'When ticked, the WHOLE order ships free as soon as one product carries a class earning free shipping, even if the others do not. Unticked, only an order made up exclusively of those classes ships free.', 'ubac-shipping' ),
 					'default'     => 'yes',
 					'desc_tip'    => true,
 					'label'       => ' ',
 				),
 
 				'title_free'             => array(
-					'title'       => __( 'Title when free', 'dahu-weight-shipping' ),
+					'title'       => __( 'Title when free', 'ubac-shipping' ),
 					'type'        => 'text',
-					'description' => __( 'Title shown to the customer when the shipment is free. Leave empty to always use the standard title.', 'dahu-weight-shipping' ),
+					'description' => __( 'Title shown to the customer when the shipment is free. Leave empty to always use the standard title.', 'ubac-shipping' ),
 					'default'     => '',
 					'desc_tip'    => true,
 				),
 
 				'class_costs_title'      => array(
-					'title'       => __( 'Flat cost per shipping class', 'dahu-weight-shipping' ),
+					'title'       => __( 'Flat cost per shipping class', 'ubac-shipping' ),
 					'type'        => 'title',
-					'description' => __( 'Charged PER UNIT, on top of whatever the weight grid returns. Leave a class empty to charge nothing for it.', 'dahu-weight-shipping' ),
+					'description' => __( 'Charged PER UNIT, on top of whatever the weight grid returns. Leave a class empty to charge nothing for it.', 'ubac-shipping' ),
 				),
 			);
 
 			if ( empty( $class_options ) ) {
-				$fields['class_costs_title']['description'] = __( 'This shop has no shipping class yet, so there is nothing to price here. Shipping classes are created under Products, and every rule above works from them.', 'dahu-weight-shipping' );
+				$fields['class_costs_title']['description'] = __( 'This shop has no shipping class yet, so there is nothing to price here. Shipping classes are created under Products, and every rule above works from them.', 'ubac-shipping' );
 			}
 
 			foreach ( $class_options as $class_id => $class_name ) {
 				$fields[ 'class_cost_' . $class_id ] = array(
 					/* translators: %s: shipping class name. */
-					'title'       => sprintf( __( 'Cost for "%s"', 'dahu-weight-shipping' ), $class_name ),
+					'title'       => sprintf( __( 'Cost for "%s"', 'ubac-shipping' ), $class_name ),
 					'type'        => 'price',
 					'default'     => '',
 					'placeholder' => '0',
@@ -341,7 +341,7 @@ function dahu_weight_shipping_method_init() {
 
 			foreach ( $errors as $error ) {
 				if ( $can_report ) {
-					WC_Admin_Settings::add_error( __( 'Weight price grid', 'dahu-weight-shipping' ) . ' — ' . $error );
+					WC_Admin_Settings::add_error( __( 'Weight price grid', 'ubac-shipping' ) . ' — ' . $error );
 				}
 			}
 
@@ -349,8 +349,8 @@ function dahu_weight_shipping_method_init() {
 
 				if ( $can_report ) {
 					WC_Admin_Settings::add_error(
-						__( 'Weight price grid', 'dahu-weight-shipping' ) . ' — '
-						. __( 'no valid bracket was found, so the previous grid has been kept.', 'dahu-weight-shipping' )
+						__( 'Weight price grid', 'ubac-shipping' ) . ' — '
+						. __( 'no valid bracket was found, so the previous grid has been kept.', 'ubac-shipping' )
 					);
 				}
 
@@ -380,8 +380,8 @@ function dahu_weight_shipping_method_init() {
 			 */
 			if ( empty( $grid ) && empty( $errors ) && $can_report && ! $this->has_any_class_cost() ) {
 				WC_Admin_Settings::add_error(
-					__( 'Weight price grid', 'dahu-weight-shipping' ) . ' — '
-					. __( 'the grid is empty and no shipping class has a cost, so this method now quotes 0 for every order. Add a bracket, or a class cost, or remove the method from the zone.', 'dahu-weight-shipping' )
+					__( 'Weight price grid', 'ubac-shipping' ) . ' — '
+					. __( 'the grid is empty and no shipping class has a cost, so this method now quotes 0 for every order. Add a bracket, or a class cost, or remove the method from the zone.', 'ubac-shipping' )
 				);
 			}
 
