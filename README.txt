@@ -1,5 +1,5 @@
 === Ubac Weight Shipping ===
-Contributors: ubacconcept
+Contributors: dahuconcept
 Tags: weight shipping, table rate, shipping zones, shipping class, shipping
 Requires at least: 6.0
 Tested up to: 7.1
