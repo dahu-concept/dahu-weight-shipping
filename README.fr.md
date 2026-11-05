@@ -1,4 +1,4 @@
-# Dahu Weight Shipping
+# Ubac Weight Shipping
 
 Une méthode de livraison WooCommerce au poids, configurable par zone, avec des
 règles par classe de livraison et des lignes de livraison en un clic sur les
@@ -72,7 +72,7 @@ pour que le chiffre montré et le chiffre facturé ne puissent pas diverger.
 Un kit vendu comme un seul produit est un seul colis. Les composants sont
 rattachés à leur kit des deux côtés — panier et commande — pour que le kit soit
 pesé et facturé une fois. Reconnus par la méta que chaque extension publie :
-Dahu Composite (`dahu_kit_parent`), WooCommerce Composite Products
+Ubac Composite (`ubac_kit_parent`), WooCommerce Composite Products
 (`composite_parent`, `_composite_*`) et WooCommerce Product Bundles (par son
 propre filtre `get_product_from_item`).
 
@@ -81,7 +81,7 @@ propre filtre `get_product_from_item`).
 ### Tarifer un autre transporteur sur les commandes manuelles
 
 ```php
-add_filter( 'dahu_weight_shipping_calculators', function ( $calculators ) {
+add_filter( 'ubac_shipping_calculators', function ( $calculators ) {
 	$calculators['mon_transporteur'] = function ( $order, $instance_id, $items_with_qty ) {
 		// Renvoyer le coût hors taxes, plus les lignes qui l'expliquent,
 		// ou un WP_Error de code 'manual' ou 'no_rate'.
@@ -102,11 +102,11 @@ offerte sur une méthode et payante sur une autre.
 
 | Hook | Type | Rôle |
 |---|---|---|
-| `dahu_weight_shipping_cost` | filtre | Dernier mot sur un coût, après grille, coûts par classe et gratuité. Pour un supplément que rien ici ne modélise |
-| `dahu_weight_shipping_default_grid` | filtre | La grille proposée sur une NOUVELLE instance ; jamais lue par une instance configurée |
-| `dahu_weight_shipping_calculators` | filtre | Identifiant de méthode => appelable, pour les commandes manuelles |
-| `dahu_weight_shipping_watched_countries` | filtre | Pays que surveille la garde « aucune méthode disponible ». Vide, le défaut, signifie tous |
-| `dahu_weight_shipping_no_rate_available` | action | Se déclenche quand un panier se retrouve sans aucune méthode de livraison |
+| `ubac_shipping_cost` | filtre | Dernier mot sur un coût, après grille, coûts par classe et gratuité. Pour un supplément que rien ici ne modélise |
+| `ubac_shipping_default_grid` | filtre | La grille proposée sur une NOUVELLE instance ; jamais lue par une instance configurée |
+| `ubac_shipping_calculators` | filtre | Identifiant de méthode => appelable, pour les commandes manuelles |
+| `ubac_shipping_watched_countries` | filtre | Pays que surveille la garde « aucune méthode disponible ». Vide, le défaut, signifie tous |
+| `ubac_shipping_no_rate_available` | action | Se déclenche quand un panier se retrouve sans aucune méthode de livraison |
 
 ## Limites assumées
 
@@ -123,7 +123,7 @@ WooCommerce, que WooCommerce supprime avec sa zone. La seule chose écrite
 ailleurs est un marqueur sur une ligne de livraison dont le coût a été corrigé à
 la main, et la désinstallation le conserve — le supprimer annulerait en silence
 cette décision, et le recalcul suivant écraserait un prix corrigé exprès.
-Définissez l'option `dahu_weight_shipping_remove_data_on_uninstall` pour retirer
+Définissez l'option `ubac_shipping_remove_data_on_uninstall` pour retirer
 ces marqueurs aussi.
 
 ## Licence

@@ -7,7 +7,7 @@
  * the shipping method or in the calculator registry, so there is no second
  * version of the pricing here to fall out of step with the first.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Nonce action shared by every endpoint in this file.
  */
-define( 'DAHU_WEIGHT_SHIPPING_NONCE', 'dahu_weight_shipping_order' );
+define( 'UBAC_SHIPPING_NONCE', 'ubac_shipping_order' );
 
 /**
  * Checks the nonce and the capability, or ends the request.
@@ -26,9 +26,9 @@ define( 'DAHU_WEIGHT_SHIPPING_NONCE', 'dahu_weight_shipping_order' );
  *
  * @return void
  */
-function dahu_weight_shipping_check_request() {
+function ubac_shipping_check_request() {
 
-	check_ajax_referer( DAHU_WEIGHT_SHIPPING_NONCE, 'nonce' );
+	check_ajax_referer( UBAC_SHIPPING_NONCE, 'nonce' );
 
 	if ( ! current_user_can( 'manage_woocommerce' ) ) {
 		wp_send_json_error( array( 'message' => __( 'You do not have permission to do that.', 'ubac-shipping' ) ) );
@@ -40,9 +40,9 @@ function dahu_weight_shipping_check_request() {
  *
  * @return WC_Order
  */
-function dahu_weight_shipping_request_order() {
+function ubac_shipping_request_order() {
 
-	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- dahu_weight_shipping_check_request() ran first.
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- ubac_shipping_check_request() ran first.
 	$order_id = isset( $_POST['order_id'] ) ? absint( $_POST['order_id'] ) : 0;
 	$order    = $order_id ? wc_get_order( $order_id ) : false;
 
@@ -59,9 +59,9 @@ function dahu_weight_shipping_request_order() {
  * @param WC_Order $order Order.
  * @return WC_Order_Item_Shipping
  */
-function dahu_weight_shipping_request_shipping_item( $order ) {
+function ubac_shipping_request_shipping_item( $order ) {
 
-	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- dahu_weight_shipping_check_request() ran first.
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- ubac_shipping_check_request() ran first.
 	$item_id = isset( $_POST['shipping_order_item_id'] ) ? absint( $_POST['shipping_order_item_id'] ) : 0;
 	$item    = $item_id ? $order->get_item( $item_id ) : false;
 
@@ -84,7 +84,7 @@ function dahu_weight_shipping_request_shipping_item( $order ) {
  * @param int $instance_id Zone instance id.
  * @return bool
  */
-function dahu_weight_shipping_zone_instance_exists( $instance_id ) {
+function ubac_shipping_zone_instance_exists( $instance_id ) {
 
 	$instance_id = absint( $instance_id );
 
@@ -102,7 +102,7 @@ function dahu_weight_shipping_zone_instance_exists( $instance_id ) {
 add_filter(
 	'woocommerce_hidden_order_itemmeta',
 	static function ( $hidden_meta ) {
-		$hidden_meta[] = DAHU_WEIGHT_SHIPPING_MANUAL_COST_META;
+		$hidden_meta[] = UBAC_SHIPPING_MANUAL_COST_META;
 		return $hidden_meta;
 	}
 );
@@ -120,7 +120,7 @@ add_filter(
  * @param int      $item_id Shipping line id.
  * @return bool
  */
-function dahu_weight_shipping_is_cost_manual( $order, $item_id ) {
+function ubac_shipping_is_cost_manual( $order, $item_id ) {
 
 	$item = $order->get_item( $item_id );
 
@@ -128,23 +128,23 @@ function dahu_weight_shipping_is_cost_manual( $order, $item_id ) {
 		return false;
 	}
 
-	return 'yes' === $item->get_meta( DAHU_WEIGHT_SHIPPING_MANUAL_COST_META );
+	return 'yes' === $item->get_meta( UBAC_SHIPPING_MANUAL_COST_META );
 }
 
-add_action( 'wp_ajax_dahu_weight_shipping_mark_manual', 'dahu_weight_shipping_ajax_mark_manual' );
+add_action( 'wp_ajax_ubac_shipping_mark_manual', 'ubac_shipping_ajax_mark_manual' );
 /**
  * Marks a shipping line as edited by hand.
  *
  * @return void
  */
-function dahu_weight_shipping_ajax_mark_manual() {
+function ubac_shipping_ajax_mark_manual() {
 
-	dahu_weight_shipping_check_request();
+	ubac_shipping_check_request();
 
-	$order = dahu_weight_shipping_request_order();
-	$item  = dahu_weight_shipping_request_shipping_item( $order );
+	$order = ubac_shipping_request_order();
+	$item  = ubac_shipping_request_shipping_item( $order );
 
-	$item->update_meta_data( DAHU_WEIGHT_SHIPPING_MANUAL_COST_META, 'yes' );
+	$item->update_meta_data( UBAC_SHIPPING_MANUAL_COST_META, 'yes' );
 	$item->save();
 
 	wp_send_json_success();
@@ -172,10 +172,10 @@ function dahu_weight_shipping_ajax_mark_manual() {
  * @param array<int, array> $items_with_qty Pairs of (order line, quantity).
  * @return void
  */
-function dahu_weight_shipping_send_result( $order, $result, $items_with_qty ) {
+function ubac_shipping_send_result( $order, $result, $items_with_qty ) {
 
-	$weight = dahu_weight_shipping_order_total_weight( $items_with_qty );
-	$shown  = dahu_weight_shipping_format_weight( $weight );
+	$weight = ubac_shipping_order_total_weight( $items_with_qty );
+	$shown  = ubac_shipping_format_weight( $weight );
 
 	if ( is_wp_error( $result ) ) {
 
@@ -210,7 +210,7 @@ function dahu_weight_shipping_send_result( $order, $result, $items_with_qty ) {
 	);
 }
 
-add_action( 'wp_ajax_dahu_weight_shipping_calculate', 'dahu_weight_shipping_ajax_calculate' );
+add_action( 'wp_ajax_ubac_shipping_calculate', 'ubac_shipping_ajax_calculate' );
 /**
  * Prices an existing shipping line — the "Recalculate" path.
  *
@@ -219,25 +219,25 @@ add_action( 'wp_ajax_dahu_weight_shipping_calculate', 'dahu_weight_shipping_ajax
  *
  * @return void
  */
-function dahu_weight_shipping_ajax_calculate() {
+function ubac_shipping_ajax_calculate() {
 
-	dahu_weight_shipping_check_request();
+	ubac_shipping_check_request();
 
-	$order = dahu_weight_shipping_request_order();
-	$item  = dahu_weight_shipping_request_shipping_item( $order );
+	$order = ubac_shipping_request_order();
+	$item  = ubac_shipping_request_shipping_item( $order );
 
 	// A cost edited by hand is never touched again: "Recalculate" then has to
 	// behave exactly as WooCommerce's own does, recomputing tax and nothing
 	// else.
-	if ( dahu_weight_shipping_is_cost_manual( $order, $item->get_id() ) ) {
+	if ( ubac_shipping_is_cost_manual( $order, $item->get_id() ) ) {
 		wp_send_json_success( array( 'skip' => true ) );
 	}
 
-	$items_with_qty = dahu_weight_shipping_collect_items_with_live_qty( $order );
+	$items_with_qty = ubac_shipping_collect_items_with_live_qty( $order );
 
-	dahu_weight_shipping_send_result(
+	ubac_shipping_send_result(
 		$order,
-		dahu_weight_shipping_calculate(
+		ubac_shipping_calculate(
 			$order,
 			$item->get_method_id(),
 			(int) $item->get_instance_id(),
@@ -247,7 +247,7 @@ function dahu_weight_shipping_ajax_calculate() {
 	);
 }
 
-add_action( 'wp_ajax_dahu_weight_shipping_set_instance', 'dahu_weight_shipping_ajax_set_instance' );
+add_action( 'wp_ajax_ubac_shipping_set_instance', 'ubac_shipping_ajax_set_instance' );
 /**
  * Attaches a freshly created shipping line to the exact zone instance chosen,
  * then prices it in the same request.
@@ -276,12 +276,12 @@ add_action( 'wp_ajax_dahu_weight_shipping_set_instance', 'dahu_weight_shipping_a
  *
  * @return void
  */
-function dahu_weight_shipping_ajax_set_instance() {
+function ubac_shipping_ajax_set_instance() {
 
-	dahu_weight_shipping_check_request();
+	ubac_shipping_check_request();
 
-	$order = dahu_weight_shipping_request_order();
-	$item  = dahu_weight_shipping_request_shipping_item( $order );
+	$order = ubac_shipping_request_order();
+	$item  = ubac_shipping_request_shipping_item( $order );
 
 	$instance_id  = isset( $_POST['instance_id'] ) ? absint( $_POST['instance_id'] ) : 0;
 	$method_id    = isset( $_POST['method_id'] ) ? sanitize_text_field( wp_unslash( $_POST['method_id'] ) ) : '';
@@ -307,7 +307,7 @@ function dahu_weight_shipping_ajax_set_instance() {
 	 * written, so the line stays as WooCommerce created it and can be attached
 	 * again once the picker has been reloaded.
 	 */
-	if ( ! dahu_weight_shipping_zone_instance_exists( $instance_id ) ) {
+	if ( ! ubac_shipping_zone_instance_exists( $instance_id ) ) {
 		wp_send_json_error(
 			array(
 				'message' => __( 'That shipping zone instance no longer exists: it has been removed from its zone since this screen was opened. Reload the order and add the shipping line again.', 'ubac-shipping' ),
@@ -335,11 +335,11 @@ function dahu_weight_shipping_ajax_set_instance() {
 	 * never a bare error — otherwise the browser would wrongly believe the
 	 * line was left unattached.
 	 */
-	$items_with_qty = dahu_weight_shipping_collect_items_with_live_qty( $order );
+	$items_with_qty = ubac_shipping_collect_items_with_live_qty( $order );
 
-	dahu_weight_shipping_send_result(
+	ubac_shipping_send_result(
 		$order,
-		dahu_weight_shipping_calculate(
+		ubac_shipping_calculate(
 			$order,
 			'' !== $method_id ? $method_id : $item->get_method_id(),
 			$instance_id,
@@ -353,7 +353,7 @@ function dahu_weight_shipping_ajax_set_instance() {
  * Zone instances available for this order
  * ---------------------------------------------------------------------- */
 
-add_action( 'wp_ajax_dahu_weight_shipping_zone_methods', 'dahu_weight_shipping_ajax_zone_methods' );
+add_action( 'wp_ajax_ubac_shipping_zone_methods', 'ubac_shipping_ajax_zone_methods' );
 /**
  * Lists the shipping method instances of the zone matching this order's
  * destination.
@@ -365,9 +365,9 @@ add_action( 'wp_ajax_dahu_weight_shipping_zone_methods', 'dahu_weight_shipping_a
  *
  * @return void
  */
-function dahu_weight_shipping_ajax_zone_methods() {
+function ubac_shipping_ajax_zone_methods() {
 
-	dahu_weight_shipping_check_request();
+	ubac_shipping_check_request();
 
 	$country = isset( $_POST['country'] ) ? sanitize_text_field( wp_unslash( $_POST['country'] ) ) : '';
 
@@ -385,7 +385,7 @@ function dahu_weight_shipping_ajax_zone_methods() {
 		wp_send_json_success( array( 'methods' => array() ) );
 	}
 
-	$calculable = dahu_weight_shipping_calculable_method_ids();
+	$calculable = ubac_shipping_calculable_method_ids();
 	$methods    = array();
 
 	// true: enabled instances only — offering one that is switched off in
@@ -425,7 +425,7 @@ function dahu_weight_shipping_ajax_zone_methods() {
  * The weight panel
  * ---------------------------------------------------------------------- */
 
-add_action( 'wp_ajax_dahu_weight_shipping_order_weight', 'dahu_weight_shipping_ajax_order_weight' );
+add_action( 'wp_ajax_ubac_shipping_order_weight', 'ubac_shipping_ajax_order_weight' );
 /**
  * Returns the order's total weight from the quantities on screen.
  *
@@ -435,19 +435,19 @@ add_action( 'wp_ajax_dahu_weight_shipping_order_weight', 'dahu_weight_shipping_a
  *
  * @return void
  */
-function dahu_weight_shipping_ajax_order_weight() {
+function ubac_shipping_ajax_order_weight() {
 
-	dahu_weight_shipping_check_request();
+	ubac_shipping_check_request();
 
-	$order  = dahu_weight_shipping_request_order();
-	$weight = dahu_weight_shipping_order_total_weight(
-		dahu_weight_shipping_collect_items_with_live_qty( $order )
+	$order  = ubac_shipping_request_order();
+	$weight = ubac_shipping_order_total_weight(
+		ubac_shipping_collect_items_with_live_qty( $order )
 	);
 
 	wp_send_json_success(
 		array(
 			'order_weight'         => $weight,
-			'order_weight_display' => dahu_weight_shipping_format_weight( $weight ),
+			'order_weight_display' => ubac_shipping_format_weight( $weight ),
 		)
 	);
 }

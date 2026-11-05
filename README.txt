@@ -1,5 +1,5 @@
 === Ubac Weight Shipping ===
-Contributors: dahuconcept
+Contributors: ubacconcept
 Tags: weight shipping, table rate, shipping zones, shipping class, shipping
 Requires at least: 6.0
 Tested up to: 7.1
@@ -17,7 +17,7 @@ that much. Expressing that in WooCommerce means either a flat rate that is
 wrong on most orders, or a table-rate plugin that asks you to model your whole
 catalogue before it will quote anything.
 
-Dahu Weight Shipping is the small version. You paste the carrier's table into
+Ubac Weight Shipping is the small version. You paste the carrier's table into
 a field, one bracket per line, and the method prices every cart from it. The
 table belongs to the shipping zone, so a second country with a second contract
 is a second instance with its own table — not a conditional rule.
@@ -95,7 +95,7 @@ every keystroke makes the screen unusable.
 
 A kit sold as one product is one parcel to the carrier, whatever the kit plugin
 did with its components. Components are folded back into their kit — in the
-cart and on the order alike — so a kit is weighed and billed once. Dahu
+cart and on the order alike — so a kit is weighed and billed once. Ubac
 Composite, WooCommerce Composite Products and WooCommerce Product Bundles are
 all recognised, by the meta they publish.
 
@@ -104,7 +104,7 @@ all recognised, by the meta they publish.
 Your other carriers' methods can be priced on manual orders too, if somebody
 teaches this plugin how. Register a calculator for a method id:
 
-`add_filter( 'dahu_weight_shipping_calculators', function ( $calculators ) {
+`add_filter( 'ubac_shipping_calculators', function ( $calculators ) {
     $calculators['my_carrier'] = function ( $order, $instance_id, $items ) {
         return array( 'cost' => 12.5, 'details' => array( 'from my carrier' ) );
     };

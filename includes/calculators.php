@@ -23,7 +23,7 @@
  * handed to it, and the one rule that must not differ between carriers,
  * free shipping by coupon, is applied here for all of them.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -51,10 +51,10 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return array<string, callable>
  */
-function dahu_weight_shipping_get_calculators() {
+function ubac_shipping_get_calculators() {
 
 	$calculators = array(
-		DAHU_WEIGHT_SHIPPING_METHOD_ID => 'dahu_weight_shipping_builtin_calculator',
+		UBAC_SHIPPING_METHOD_ID => 'ubac_shipping_builtin_calculator',
 	);
 
 	/**
@@ -68,7 +68,7 @@ function dahu_weight_shipping_get_calculators() {
 	 *
 	 * @param array<string, callable> $calculators Method id => callable.
 	 */
-	$calculators = (array) apply_filters( 'dahu_weight_shipping_calculators', $calculators );
+	$calculators = (array) apply_filters( 'ubac_shipping_calculators', $calculators );
 
 	return array_filter( $calculators, 'is_callable' );
 }
@@ -78,8 +78,8 @@ function dahu_weight_shipping_get_calculators() {
  *
  * @return array<int, string>
  */
-function dahu_weight_shipping_calculable_method_ids() {
-	return array_keys( dahu_weight_shipping_get_calculators() );
+function ubac_shipping_calculable_method_ids() {
+	return array_keys( ubac_shipping_get_calculators() );
 }
 
 /**
@@ -103,7 +103,7 @@ function dahu_weight_shipping_calculable_method_ids() {
  * @param WC_Order $order Order being edited.
  * @return bool
  */
-function dahu_weight_shipping_order_has_free_shipping_coupon( $order ) {
+function ubac_shipping_order_has_free_shipping_coupon( $order ) {
 
 	foreach ( $order->get_coupon_codes() as $code ) {
 
@@ -133,9 +133,9 @@ function dahu_weight_shipping_order_has_free_shipping_coupon( $order ) {
  * @param array<int, array> $items_with_qty Pairs of (order line, quantity).
  * @return array{cost: float, details: array<int, string>}|WP_Error
  */
-function dahu_weight_shipping_calculate( $order, $method_id, $instance_id, $items_with_qty ) {
+function ubac_shipping_calculate( $order, $method_id, $instance_id, $items_with_qty ) {
 
-	$calculators = dahu_weight_shipping_get_calculators();
+	$calculators = ubac_shipping_get_calculators();
 
 	if ( ! isset( $calculators[ $method_id ] ) ) {
 		return new WP_Error(
@@ -160,7 +160,7 @@ function dahu_weight_shipping_calculate( $order, $method_id, $instance_id, $item
 	$cost    = (float) $result['cost'];
 	$details = isset( $result['details'] ) ? array_values( (array) $result['details'] ) : array();
 
-	if ( dahu_weight_shipping_order_has_free_shipping_coupon( $order ) ) {
+	if ( ubac_shipping_order_has_free_shipping_coupon( $order ) ) {
 		$cost      = 0.0;
 		$details[] = __( 'cost brought down to zero by a free-shipping coupon', 'ubac-shipping' );
 	}
@@ -184,7 +184,7 @@ function dahu_weight_shipping_calculate( $order, $method_id, $instance_id, $item
  * @param array<int, array> $items_with_qty Pairs of (order line, quantity).
  * @return array{cost: float, details: array<int, string>}|WP_Error
  */
-function dahu_weight_shipping_builtin_calculator( $order, $instance_id, $items_with_qty ) {
+function ubac_shipping_builtin_calculator( $order, $instance_id, $items_with_qty ) {
 
 	/*
 	 * The instance is read from the LINE itself, never guessed as "the first
@@ -204,7 +204,7 @@ function dahu_weight_shipping_builtin_calculator( $order, $instance_id, $items_w
 		);
 	}
 
-	$method = dahu_weight_shipping_get_method( $instance_id );
+	$method = ubac_shipping_get_method( $instance_id );
 
 	if ( ! $method ) {
 		return new WP_Error(
@@ -216,7 +216,7 @@ function dahu_weight_shipping_builtin_calculator( $order, $instance_id, $items_w
 	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- the endpoint verified the nonce before calling.
 	$live_country = isset( $_POST['country'] ) ? sanitize_text_field( wp_unslash( $_POST['country'] ) ) : '';
 
-	$package = dahu_weight_shipping_build_order_package( $order, $items_with_qty, $live_country );
+	$package = ubac_shipping_build_order_package( $order, $items_with_qty, $live_country );
 
 	$method->calculate_shipping( $package );
 

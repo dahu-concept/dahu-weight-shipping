@@ -9,7 +9,7 @@
  * what somebody wrote, and it keeps the stored value readable by a human
  * looking at the database during an incident.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return array<int, array{min: float, max: float, price: float}>
  */
-function dahu_weight_shipping_default_grid() {
+function ubac_shipping_default_grid() {
 
 	$grid = array(
 		array(
@@ -58,7 +58,7 @@ function dahu_weight_shipping_default_grid() {
 	 *
 	 * @param array<int, array{min: float, max: float, price: float}> $grid Brackets.
 	 */
-	return (array) apply_filters( 'dahu_weight_shipping_default_grid', $grid );
+	return (array) apply_filters( 'ubac_shipping_default_grid', $grid );
 }
 
 /**
@@ -72,7 +72,7 @@ function dahu_weight_shipping_default_grid() {
  * @param float $value Number.
  * @return string
  */
-function dahu_weight_shipping_format_grid_number( $value ) {
+function ubac_shipping_format_grid_number( $value ) {
 	return rtrim( rtrim( number_format( (float) $value, 3, '.', '' ), '0' ), '.' );
 }
 
@@ -82,7 +82,7 @@ function dahu_weight_shipping_format_grid_number( $value ) {
  * @param array<int, array> $grid Brackets.
  * @return string One bracket per line, "min-max:price".
  */
-function dahu_weight_shipping_format_grid( $grid ) {
+function ubac_shipping_format_grid( $grid ) {
 
 	$lines = array();
 
@@ -92,9 +92,9 @@ function dahu_weight_shipping_format_grid( $grid ) {
 			continue;
 		}
 
-		$lines[] = dahu_weight_shipping_format_grid_number( $bracket['min'] )
-			. '-' . dahu_weight_shipping_format_grid_number( $bracket['max'] )
-			. ':' . dahu_weight_shipping_format_grid_number( $bracket['price'] );
+		$lines[] = ubac_shipping_format_grid_number( $bracket['min'] )
+			. '-' . ubac_shipping_format_grid_number( $bracket['max'] )
+			. ':' . ubac_shipping_format_grid_number( $bracket['price'] );
 	}
 
 	return implode( "\n", $lines );
@@ -116,7 +116,7 @@ function dahu_weight_shipping_format_grid( $grid ) {
  * @param array<int, string> $errors Filled with a message per rejected line.
  * @return array<int, array{min: float, max: float, price: float}>
  */
-function dahu_weight_shipping_parse_grid( $text, &$errors = array() ) {
+function ubac_shipping_parse_grid( $text, &$errors = array() ) {
 
 	$grid   = array();
 	$errors = array();
@@ -191,7 +191,7 @@ function dahu_weight_shipping_parse_grid( $text, &$errors = array() ) {
  * @param array<int, array> $grid   Brackets to search.
  * @return float
  */
-function dahu_weight_shipping_price_for_weight( $weight, $grid ) {
+function ubac_shipping_price_for_weight( $weight, $grid ) {
 
 	if ( empty( $grid ) ) {
 		return 0.0;

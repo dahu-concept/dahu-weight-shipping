@@ -2,7 +2,7 @@
 /**
  * The order screen: the weight panel, and the assets driving the rest.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return array<int, string>
  */
-function dahu_weight_shipping_order_screen_ids() {
+function ubac_shipping_order_screen_ids() {
 
 	$screens = array( 'shop_order' );
 
@@ -37,7 +37,7 @@ function dahu_weight_shipping_order_screen_ids() {
  *
  * @return bool
  */
-function dahu_weight_shipping_is_order_screen() {
+function ubac_shipping_is_order_screen() {
 
 	if ( ! function_exists( 'get_current_screen' ) ) {
 		return false;
@@ -45,26 +45,26 @@ function dahu_weight_shipping_is_order_screen() {
 
 	$screen = get_current_screen();
 
-	return $screen && in_array( $screen->id, dahu_weight_shipping_order_screen_ids(), true );
+	return $screen && in_array( $screen->id, ubac_shipping_order_screen_ids(), true );
 }
 
 /* -------------------------------------------------------------------------
  * The weight panel
  * ---------------------------------------------------------------------- */
 
-add_action( 'add_meta_boxes', 'dahu_weight_shipping_register_weight_panel' );
+add_action( 'add_meta_boxes', 'ubac_shipping_register_weight_panel' );
 /**
  * Declares the panel on both order screens.
  *
  * @return void
  */
-function dahu_weight_shipping_register_weight_panel() {
+function ubac_shipping_register_weight_panel() {
 
-	foreach ( dahu_weight_shipping_order_screen_ids() as $screen ) {
+	foreach ( ubac_shipping_order_screen_ids() as $screen ) {
 		add_meta_box(
-			'dahu_weight_shipping_order_weight',
+			'ubac_shipping_order_weight',
 			__( 'Shipping weight', 'ubac-shipping' ),
-			'dahu_weight_shipping_render_weight_panel',
+			'ubac_shipping_render_weight_panel',
 			$screen,
 			'side',
 			'default'
@@ -93,31 +93,31 @@ function dahu_weight_shipping_register_weight_panel() {
  *                                        type depends on which screen is in use.
  * @return void
  */
-function dahu_weight_shipping_render_weight_panel( $post_or_order ) {
+function ubac_shipping_render_weight_panel( $post_or_order ) {
 
 	$order = ( $post_or_order instanceof WC_Order ) ? $post_or_order : wc_get_order( $post_or_order->ID );
 
-	$items = $order ? dahu_weight_shipping_collect_items_with_live_qty( $order ) : array();
+	$items = $order ? ubac_shipping_collect_items_with_live_qty( $order ) : array();
 
-	$weight = $order ? dahu_weight_shipping_order_total_weight( $items ) : 0;
+	$weight = $order ? ubac_shipping_order_total_weight( $items ) : 0;
 
 	$unit = get_option( 'woocommerce_weight_unit', 'kg' );
 
 	?>
-	<div class="dahu-ui dahu-ws-panel" id="dahu-ws-weight-panel">
-		<p class="dahu-ws-panel__figure">
-			<strong class="dahu-ws-panel__value" id="dahu-ws-weight-value"><?php echo esc_html( dahu_weight_shipping_format_weight( $weight ) ); ?></strong>
-			<span class="dahu-ws-panel__unit"><?php echo esc_html( $unit ); ?></span>
+	<div class="ubac-ui ubac-ws-panel" id="ubac-ws-weight-panel">
+		<p class="ubac-ws-panel__figure">
+			<strong class="ubac-ws-panel__value" id="ubac-ws-weight-value"><?php echo esc_html( ubac_shipping_format_weight( $weight ) ); ?></strong>
+			<span class="ubac-ws-panel__unit"><?php echo esc_html( $unit ); ?></span>
 		</p>
-		<p class="dahu-ws-panel__stale" id="dahu-ws-weight-stale" hidden>
+		<p class="ubac-ws-panel__stale" id="ubac-ws-weight-stale" hidden>
 			<?php esc_html_e( 'Quantities have changed on screen, so this weight is out of date.', 'ubac-shipping' ); ?>
 		</p>
-		<p class="dahu-ws-panel__actions">
-			<button type="button" class="dahu-ui-btn" id="dahu-ws-weight-refresh">
+		<p class="ubac-ws-panel__actions">
+			<button type="button" class="ubac-ui-btn" id="ubac-ws-weight-refresh">
 				<?php esc_html_e( 'Refresh', 'ubac-shipping' ); ?>
 			</button>
 		</p>
-		<p class="dahu-ws-panel__note">
+		<p class="ubac-ws-panel__note">
 			<?php
 			/*
 			 * A new order has no lines yet, and the panel's own sentence is
@@ -128,7 +128,7 @@ function dahu_weight_shipping_render_weight_panel( $post_or_order ) {
 			 * keeps the usual sentence, because there the figure is true.
 			 */
 			if ( ! $items ) {
-				echo '<span class="dahu-ui-hint">'
+				echo '<span class="ubac-ui-hint">'
 					. esc_html__( 'No items on this order yet: the weight appears as soon as you add one.', 'ubac-shipping' )
 					. '</span>';
 			} else {
@@ -144,7 +144,7 @@ function dahu_weight_shipping_render_weight_panel( $post_or_order ) {
  * Assets
  * ---------------------------------------------------------------------- */
 
-add_action( 'admin_enqueue_scripts', 'dahu_weight_shipping_enqueue_order_assets' );
+add_action( 'admin_enqueue_scripts', 'ubac_shipping_enqueue_order_assets' );
 /**
  * Loads the order screen's stylesheet and script.
  *
@@ -156,9 +156,9 @@ add_action( 'admin_enqueue_scripts', 'dahu_weight_shipping_enqueue_order_assets'
  *
  * @return void
  */
-function dahu_weight_shipping_enqueue_order_assets() {
+function ubac_shipping_enqueue_order_assets() {
 
-	if ( ! dahu_weight_shipping_is_order_screen() ) {
+	if ( ! ubac_shipping_is_order_screen() ) {
 		return;
 	}
 
@@ -169,24 +169,24 @@ function dahu_weight_shipping_enqueue_order_assets() {
 	// first serves all of them, and a shop with six of these installed
 	// downloads one copy.
 	wp_enqueue_style(
-		'dahu-ui',
-		DAHU_WEIGHT_SHIPPING_URL . 'assets/css/dahu-ui.css',
+		'ubac-ui',
+		UBAC_SHIPPING_URL . 'assets/css/ubac-ui.css',
 		array(),
-		DAHU_WEIGHT_SHIPPING_VERSION
+		UBAC_SHIPPING_VERSION
 	);
 
 	wp_enqueue_style(
-		'dahu-weight-shipping-order',
-		DAHU_WEIGHT_SHIPPING_URL . 'assets/css/admin-order.css',
-		array( 'dahu-ui' ),
-		DAHU_WEIGHT_SHIPPING_VERSION
+		'ubac-shipping-order',
+		UBAC_SHIPPING_URL . 'assets/css/admin-order.css',
+		array( 'ubac-ui' ),
+		UBAC_SHIPPING_VERSION
 	);
 
 	wp_enqueue_script(
-		'dahu-weight-shipping-order',
-		DAHU_WEIGHT_SHIPPING_URL . 'assets/js/admin-order.js',
+		'ubac-shipping-order',
+		UBAC_SHIPPING_URL . 'assets/js/admin-order.js',
 		array( 'jquery' ),
-		DAHU_WEIGHT_SHIPPING_VERSION,
+		UBAC_SHIPPING_VERSION,
 		true
 	);
 
@@ -213,13 +213,13 @@ function dahu_weight_shipping_enqueue_order_assets() {
 	}
 
 	wp_localize_script(
-		'dahu-weight-shipping-order',
-		'dahuWeightShipping',
+		'ubac-shipping-order',
+		'ubacWeightShipping',
 		array(
 			'ajaxUrl'    => admin_url( 'admin-ajax.php' ),
-			'nonce'      => wp_create_nonce( DAHU_WEIGHT_SHIPPING_NONCE ),
+			'nonce'      => wp_create_nonce( UBAC_SHIPPING_NONCE ),
 			'decimalSep' => $decimal_sep,
-			'methodIds'  => dahu_weight_shipping_calculable_method_ids(),
+			'methodIds'  => ubac_shipping_calculable_method_ids(),
 			/*
 			 * How long to wait for WooCommerce's own add-order-shipping
 			 * request to produce the new row: 90 attempts, half a second

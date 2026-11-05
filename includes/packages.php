@@ -22,7 +22,7 @@
  * into their kit so the kit is billed once, with the weight of everything in
  * it.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit;
  * Cart key of the kit an item belongs to, or '' when it belongs to none.
  *
  * Two layouts are recognised, by the meta each plugin writes:
- * `dahu_kit_parent` (Dahu Composite) and `composite_parent` (WooCommerce
+ * `ubac_kit_parent` (Ubac Composite) and `composite_parent` (WooCommerce
  * Composite Products). Both mean the same thing, and both are read rather
  * than one being preferred: a shop may well run only one of them, and which
  * one must not change the price.
@@ -43,10 +43,10 @@ defined( 'ABSPATH' ) || exit;
  * @param array $cart_item Cart or package item.
  * @return string
  */
-function dahu_weight_shipping_item_kit_parent( $cart_item ) {
+function ubac_shipping_item_kit_parent( $cart_item ) {
 
-	if ( ! empty( $cart_item['dahu_kit_parent'] ) ) {
-		return (string) $cart_item['dahu_kit_parent'];
+	if ( ! empty( $cart_item['ubac_kit_parent'] ) ) {
+		return (string) $cart_item['ubac_kit_parent'];
 	}
 
 	if ( ! empty( $cart_item['composite_parent'] ) ) {
@@ -71,7 +71,7 @@ function dahu_weight_shipping_item_kit_parent( $cart_item ) {
  * @param WC_Order_Item_Product $order_item Order line.
  * @return bool
  */
-function dahu_weight_shipping_is_kit_component( $order_item ) {
+function ubac_shipping_is_kit_component( $order_item ) {
 	return '' !== (string) $order_item->get_meta( '_composite_parent' );
 }
 
@@ -86,9 +86,9 @@ function dahu_weight_shipping_is_kit_component( $order_item ) {
  * @param WC_Order_Item_Product $order_item Order line.
  * @return bool
  */
-function dahu_weight_shipping_is_kit_container( $order_item ) {
+function ubac_shipping_is_kit_container( $order_item ) {
 
-	if ( dahu_weight_shipping_is_kit_component( $order_item ) ) {
+	if ( ubac_shipping_is_kit_component( $order_item ) ) {
 		return false;
 	}
 
@@ -123,7 +123,7 @@ function dahu_weight_shipping_is_kit_container( $order_item ) {
  * @param float                 $individual_weight Weight of the components shipped individually, per unit.
  * @return float
  */
-function dahu_weight_shipping_effective_item_weight( $order_item, $product, $components_weight = 0, $individual_weight = 0 ) {
+function ubac_shipping_effective_item_weight( $order_item, $product, $components_weight = 0, $individual_weight = 0 ) {
 
 	$composite_weight = $order_item->get_meta( '_composite_weight' );
 
@@ -161,7 +161,7 @@ function dahu_weight_shipping_effective_item_weight( $order_item, $product, $com
  * @param array $package WooCommerce package.
  * @return array
  */
-function dahu_weight_shipping_billable_package( $package ) {
+function ubac_shipping_billable_package( $package ) {
 
 	if ( empty( $package['contents'] ) || ! is_array( $package['contents'] ) ) {
 		return $package;
@@ -172,7 +172,7 @@ function dahu_weight_shipping_billable_package( $package ) {
 
 	foreach ( $contents as $key => $item ) {
 
-		$parent_key = dahu_weight_shipping_item_kit_parent( $item );
+		$parent_key = ubac_shipping_item_kit_parent( $item );
 
 		if ( '' === $parent_key ) {
 			continue;
@@ -235,7 +235,7 @@ function dahu_weight_shipping_billable_package( $package ) {
  * @param callable $callback Calculation to run.
  * @return mixed Whatever the callback returns.
  */
-function dahu_weight_shipping_with_bundle_view( $callback ) {
+function ubac_shipping_with_bundle_view( $callback ) {
 
 	// No isset(): WC_PB()->order is served through __get(), where isset()
 	// answers false and the filter would never be attached.
@@ -277,7 +277,7 @@ function dahu_weight_shipping_with_bundle_view( $callback ) {
  * @param WC_Order $order Order being edited.
  * @return array<int, array{0: WC_Order_Item_Product, 1: int}>
  */
-function dahu_weight_shipping_collect_items_with_live_qty( $order ) {
+function ubac_shipping_collect_items_with_live_qty( $order ) {
 
 	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- every caller verifies the nonce before reaching this point.
 	$live_items_raw = isset( $_POST['live_items'] ) ? wp_unslash( $_POST['live_items'] ) : '';
@@ -333,23 +333,23 @@ function dahu_weight_shipping_collect_items_with_live_qty( $order ) {
  * @param array<int, array> $items_with_qty Pairs of (order line, quantity).
  * @return array Indexed contents.
  */
-function dahu_weight_shipping_build_package_contents( $items_with_qty ) {
+function ubac_shipping_build_package_contents( $items_with_qty ) {
 
-	return dahu_weight_shipping_with_bundle_view(
+	return ubac_shipping_with_bundle_view(
 		static function () use ( $items_with_qty ) {
-			return dahu_weight_shipping_build_package_contents_raw( $items_with_qty );
+			return ubac_shipping_build_package_contents_raw( $items_with_qty );
 		}
 	);
 }
 
 /**
- * Body of dahu_weight_shipping_build_package_contents(), to be called under
- * dahu_weight_shipping_with_bundle_view().
+ * Body of ubac_shipping_build_package_contents(), to be called under
+ * ubac_shipping_with_bundle_view().
  *
  * @param array<int, array> $items_with_qty Pairs of (order line, quantity).
  * @return array
  */
-function dahu_weight_shipping_build_package_contents_raw( $items_with_qty ) {
+function ubac_shipping_build_package_contents_raw( $items_with_qty ) {
 
 	/*
 	 * First pass: the weight of each kit's components, indexed by the key
@@ -366,7 +366,7 @@ function dahu_weight_shipping_build_package_contents_raw( $items_with_qty ) {
 
 		list( $order_item, $qty ) = $pair;
 
-		if ( ! dahu_weight_shipping_is_kit_component( $order_item ) ) {
+		if ( ! ubac_shipping_is_kit_component( $order_item ) ) {
 			continue;
 		}
 
@@ -410,11 +410,11 @@ function dahu_weight_shipping_build_package_contents_raw( $items_with_qty ) {
 		}
 
 		// A kit component is never counted on its own.
-		if ( dahu_weight_shipping_is_kit_component( $order_item ) ) {
+		if ( ubac_shipping_is_kit_component( $order_item ) ) {
 			continue;
 		}
 
-		$is_container = dahu_weight_shipping_is_kit_container( $order_item );
+		$is_container = ubac_shipping_is_kit_container( $order_item );
 
 		// A kit container may be virtual and must still be counted: it is the
 		// line carrying the kit's shipping class.
@@ -439,7 +439,7 @@ function dahu_weight_shipping_build_package_contents_raw( $items_with_qty ) {
 			}
 		}
 
-		$effective_weight = dahu_weight_shipping_effective_item_weight( $order_item, $product, $components_weight, $individual_weight );
+		$effective_weight = ubac_shipping_effective_item_weight( $order_item, $product, $components_weight, $individual_weight );
 
 		/*
 		 * The delicate point of this transposition.
@@ -463,7 +463,7 @@ function dahu_weight_shipping_build_package_contents_raw( $items_with_qty ) {
 			$product_for_package->set_weight( $effective_weight );
 		}
 
-		$package_contents[ 'dahu_weight_shipping_' . $order_item->get_id() ] = array(
+		$package_contents[ 'ubac_shipping_' . $order_item->get_id() ] = array(
 			'data'     => $product_for_package,
 			'quantity' => $qty,
 		);
@@ -483,11 +483,11 @@ function dahu_weight_shipping_build_package_contents_raw( $items_with_qty ) {
  * @param array<int, array> $items_with_qty Pairs of (order line, quantity).
  * @return float Weight in the shop's weight unit, rounded to the gram.
  */
-function dahu_weight_shipping_order_total_weight( $items_with_qty ) {
+function ubac_shipping_order_total_weight( $items_with_qty ) {
 
 	$weight = 0.0;
 
-	foreach ( dahu_weight_shipping_build_package_contents( $items_with_qty ) as $line ) {
+	foreach ( ubac_shipping_build_package_contents( $items_with_qty ) as $line ) {
 		$weight += (float) $line['data']->get_weight() * (float) $line['quantity'];
 	}
 
@@ -509,7 +509,7 @@ function dahu_weight_shipping_order_total_weight( $items_with_qty ) {
  * @param string            $country        Country shown on screen, if any.
  * @return array
  */
-function dahu_weight_shipping_build_order_package( $order, $items_with_qty, $country = '' ) {
+function ubac_shipping_build_order_package( $order, $items_with_qty, $country = '' ) {
 
 	$country = $country ? $country : ( $order->get_shipping_country() ? $order->get_shipping_country() : $order->get_billing_country() );
 
@@ -520,7 +520,7 @@ function dahu_weight_shipping_build_order_package( $order, $items_with_qty, $cou
 			'postcode' => $order->get_shipping_postcode() ? $order->get_shipping_postcode() : $order->get_billing_postcode(),
 			'city'     => $order->get_shipping_city() ? $order->get_shipping_city() : $order->get_billing_city(),
 		),
-		'contents'        => dahu_weight_shipping_build_package_contents( $items_with_qty ),
+		'contents'        => ubac_shipping_build_package_contents( $items_with_qty ),
 		'contents_cost'   => 0,
 		'applied_coupons' => array(),
 	);
@@ -539,6 +539,6 @@ function dahu_weight_shipping_build_order_package( $order, $items_with_qty, $cou
  * @param float $weight Weight.
  * @return string
  */
-function dahu_weight_shipping_format_weight( $weight ) {
+function ubac_shipping_format_weight( $weight ) {
 	return number_format_i18n( (float) $weight, 3 );
 }

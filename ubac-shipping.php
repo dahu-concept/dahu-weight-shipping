@@ -14,15 +14,15 @@
  * WC requires at least: 7.0
  * WC tested up to:   11.2
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'DAHU_WEIGHT_SHIPPING_VERSION', '1.1.2' );
-define( 'DAHU_WEIGHT_SHIPPING_FILE', __FILE__ );
-define( 'DAHU_WEIGHT_SHIPPING_PATH', plugin_dir_path( __FILE__ ) );
-define( 'DAHU_WEIGHT_SHIPPING_URL', plugin_dir_url( __FILE__ ) );
+define( 'UBAC_SHIPPING_VERSION', '1.1.2' );
+define( 'UBAC_SHIPPING_FILE', __FILE__ );
+define( 'UBAC_SHIPPING_PATH', plugin_dir_path( __FILE__ ) );
+define( 'UBAC_SHIPPING_URL', plugin_dir_url( __FILE__ ) );
 
 /**
  * Shipping method identifier, as WooCommerce stores it on every zone instance
@@ -35,13 +35,13 @@ define( 'DAHU_WEIGHT_SHIPPING_URL', plugin_dir_url( __FILE__ ) );
  * which is exactly the kind of assumption that produces a fatal error on an
  * early request.
  */
-define( 'DAHU_WEIGHT_SHIPPING_METHOD_ID', 'dahu_weight_shipping' );
+define( 'UBAC_SHIPPING_METHOD_ID', 'ubac_shipping' );
 
 /**
  * Meta key written on a shipping line as soon as somebody edits its cost by
  * hand. Once present, this plugin never recomputes that line's cost again.
  */
-define( 'DAHU_WEIGHT_SHIPPING_MANUAL_COST_META', '_dahu_weight_shipping_manual_cost' );
+define( 'UBAC_SHIPPING_MANUAL_COST_META', '_ubac_shipping_manual_cost' );
 
 /* -------------------------------------------------------------------------
  * Translations
@@ -57,15 +57,15 @@ define( 'DAHU_WEIGHT_SHIPPING_MANUAL_COST_META', '_dahu_weight_shipping_manual_c
  * Modules
  * ---------------------------------------------------------------------- */
 
-require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/grid.php';
-require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/packages.php';
-require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/shipping-method.php';
-require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/calculators.php';
-require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/diagnostics.php';
+require_once UBAC_SHIPPING_PATH . 'includes/grid.php';
+require_once UBAC_SHIPPING_PATH . 'includes/packages.php';
+require_once UBAC_SHIPPING_PATH . 'includes/shipping-method.php';
+require_once UBAC_SHIPPING_PATH . 'includes/calculators.php';
+require_once UBAC_SHIPPING_PATH . 'includes/diagnostics.php';
 
 if ( is_admin() ) {
-	require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/order-ajax.php';
-	require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/order-screen.php';
+	require_once UBAC_SHIPPING_PATH . 'includes/order-ajax.php';
+	require_once UBAC_SHIPPING_PATH . 'includes/order-screen.php';
 }
 
 /* -------------------------------------------------------------------------
@@ -98,7 +98,7 @@ add_action(
  *
  * @return string
  */
-function dahu_weight_shipping_settings_url() {
+function ubac_shipping_settings_url() {
 	return admin_url( 'admin.php?page=wc-settings&tab=shipping' );
 }
 
@@ -107,7 +107,7 @@ add_filter(
 	static function ( $links ) {
 		$page = sprintf(
 			'<a href="%s">%s</a>',
-			esc_url( dahu_weight_shipping_settings_url() ),
+			esc_url( ubac_shipping_settings_url() ),
 			esc_html__( 'Shipping zones', 'ubac-shipping' )
 		);
 		array_unshift( $links, $page );
@@ -141,7 +141,7 @@ add_filter(
  * Registered here rather than inside the admin include, because the
  * activation flag has to be set whatever else is loaded.
  */
-require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/dahu-welcome.php';
+require_once UBAC_SHIPPING_PATH . 'includes/ubac-welcome.php';
 
 /*
  * The flag, not a redirect: an activation hook that redirects breaks bulk
@@ -152,21 +152,21 @@ require_once DAHU_WEIGHT_SHIPPING_PATH . 'includes/dahu-welcome.php';
 register_activation_hook(
 	__FILE__,
 	static function () {
-		Dahu_Welcome::mark_activated( 'dahu-weight-shipping' );
+		Ubac_Welcome::mark_activated( 'ubac-shipping' );
 	}
 );
 
 add_action(
 	'init',
 	static function () {
-		Dahu_Welcome::register(
+		Ubac_Welcome::register(
 			array(
-				'slug'       => 'dahu-weight-shipping',
+				'slug'       => 'ubac-shipping',
 				'name'       => __( 'Weight shipping', 'ubac-shipping' ),
 				'tagline'    => __( 'Keeps the order weight right, so the shipping price is too.', 'ubac-shipping' ),
-				'file'       => DAHU_WEIGHT_SHIPPING_FILE,
-				'version'    => DAHU_WEIGHT_SHIPPING_VERSION,
-				'textdomain' => 'dahu-weight-shipping',
+				'file'       => UBAC_SHIPPING_FILE,
+				'version'    => UBAC_SHIPPING_VERSION,
+				'textdomain' => 'ubac-shipping',
 				'mark'       => array(
 					'view'  => '0 0 112 112',
 					'paths' => array(
@@ -220,17 +220,17 @@ add_action(
 				'tour_screen' => 'woocommerce_page_wc-orders',
 				'tour'        => array(
 					array(
-						'selector' => '#dahu-ws-weight-value',
+						'selector' => '#ubac-ws-weight-value',
 						'title'    => __( 'The order weight', 'ubac-shipping' ),
 						'text'     => __( 'Worked out from the lines of this order.', 'ubac-shipping' ),
 					),
 					array(
-						'selector' => '#dahu-ws-weight-refresh',
+						'selector' => '#ubac-ws-weight-refresh',
 						'title'    => __( 'Refresh after edits', 'ubac-shipping' ),
 						'text'     => __( 'Click it once the quantities have changed.', 'ubac-shipping' ),
 					),
 					array(
-						'selector' => '.dahu-ws-panel__note',
+						'selector' => '.ubac-ws-panel__note',
 						'title'    => __( 'The weight that is priced', 'ubac-shipping' ),
 						'text'     => __( 'This is the weight that enters the price grid.', 'ubac-shipping' ),
 					),

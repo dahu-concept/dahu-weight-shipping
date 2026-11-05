@@ -2,12 +2,12 @@
 /**
  * A single guard: say so when a cart ends up with no shipping method at all.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'ABSPATH' ) || exit;
 
-add_filter( 'woocommerce_package_rates', 'dahu_weight_shipping_warn_when_no_rate', 1000, 2 );
+add_filter( 'woocommerce_package_rates', 'ubac_shipping_warn_when_no_rate', 1000, 2 );
 /**
  * Records that a cart was left without a single offerable shipping method,
  * which blocks checkout.
@@ -25,7 +25,7 @@ add_filter( 'woocommerce_package_rates', 'dahu_weight_shipping_warn_when_no_rate
  * @param array $package WooCommerce shipping package.
  * @return array The rates, unchanged in every case.
  */
-function dahu_weight_shipping_warn_when_no_rate( $rates, $package ) {
+function ubac_shipping_warn_when_no_rate( $rates, $package ) {
 
 	static $already_logged = false;
 
@@ -47,7 +47,7 @@ function dahu_weight_shipping_warn_when_no_rate( $rates, $package ) {
 	 *
 	 * @param array<int, string> $countries ISO country codes. Empty means all.
 	 */
-	$watched = (array) apply_filters( 'dahu_weight_shipping_watched_countries', array() );
+	$watched = (array) apply_filters( 'ubac_shipping_watched_countries', array() );
 
 	if ( ! empty( $watched ) && ! in_array( $country, $watched, true ) ) {
 		return $rates;
@@ -59,7 +59,7 @@ function dahu_weight_shipping_warn_when_no_rate( $rates, $package ) {
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Deliberate, gated on WP_DEBUG_LOG just above.
 		error_log(
 			sprintf(
-				'[Dahu Weight Shipping] no shipping method available for this cart (destination: %s); check the shipping zone configuration.',
+				'[Ubac Weight Shipping] no shipping method available for this cart (destination: %s); check the shipping zone configuration.',
 				'' !== $country ? $country : 'unknown'
 			)
 		);
@@ -76,7 +76,7 @@ function dahu_weight_shipping_warn_when_no_rate( $rates, $package ) {
 	 *
 	 * @param array $package WooCommerce shipping package.
 	 */
-	do_action( 'dahu_weight_shipping_no_rate_available', $package );
+	do_action( 'ubac_shipping_no_rate_available', $package );
 
 	return $rates;
 }

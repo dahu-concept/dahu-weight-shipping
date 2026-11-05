@@ -7,7 +7,7 @@
  * shipping to two countries at two different price grids configures two
  * instances, and nothing in this plugin has to know that.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 add_filter(
 	'woocommerce_shipping_methods',
 	static function ( $methods ) {
-		$methods[ DAHU_WEIGHT_SHIPPING_METHOD_ID ] = 'Dahu_Weight_Shipping_Method';
+		$methods[ UBAC_SHIPPING_METHOD_ID ] = 'Ubac_Shipping_Method';
 		return $methods;
 	}
 );
@@ -29,7 +29,7 @@ add_filter(
  * instantiates anything and the same settings have to be reached by hand.
  *
  * WooCommerce's own WC_Shipping_Zones::get_shipping_method() does the
- * instantiating, and NOT `new Dahu_Weight_Shipping_Method( $instance_id )`.
+ * instantiating, and NOT `new Ubac_Shipping_Method( $instance_id )`.
  * The difference matters more than it looks, because that constructor
  * accepts any number at all: an instance deleted from its zone leaves its id
  * behind on every order line that used it, and constructing it directly
@@ -48,9 +48,9 @@ add_filter(
  * here first.
  *
  * @param int $instance_id Zone instance id.
- * @return Dahu_Weight_Shipping_Method|null
+ * @return Ubac_Shipping_Method|null
  */
-function dahu_weight_shipping_get_method( $instance_id ) {
+function ubac_shipping_get_method( $instance_id ) {
 
 	$instance_id = absint( $instance_id );
 
@@ -58,20 +58,20 @@ function dahu_weight_shipping_get_method( $instance_id ) {
 		return null;
 	}
 
-	if ( ! class_exists( 'Dahu_Weight_Shipping_Method' ) && function_exists( 'WC' ) ) {
+	if ( ! class_exists( 'Ubac_Shipping_Method' ) && function_exists( 'WC' ) ) {
 		WC()->shipping();
 	}
 
 	$method = WC_Shipping_Zones::get_shipping_method( $instance_id );
 
-	if ( ! $method || ! ( $method instanceof Dahu_Weight_Shipping_Method ) ) {
+	if ( ! $method || ! ( $method instanceof Ubac_Shipping_Method ) ) {
 		return null;
 	}
 
 	return $method;
 }
 
-add_action( 'woocommerce_shipping_init', 'dahu_weight_shipping_method_init' );
+add_action( 'woocommerce_shipping_init', 'ubac_shipping_method_init' );
 /**
  * Declares the method class.
  *
@@ -80,9 +80,9 @@ add_action( 'woocommerce_shipping_init', 'dahu_weight_shipping_method_init' );
  *
  * @return void
  */
-function dahu_weight_shipping_method_init() {
+function ubac_shipping_method_init() {
 
-	if ( class_exists( 'Dahu_Weight_Shipping_Method' ) ) {
+	if ( class_exists( 'Ubac_Shipping_Method' ) ) {
 		return;
 	}
 
@@ -95,7 +95,7 @@ function dahu_weight_shipping_method_init() {
 	 * altogether. None of those rules is written in code: each is a setting,
 	 * so a shop expresses its own carrier contract without a line of PHP.
 	 */
-	class Dahu_Weight_Shipping_Method extends WC_Shipping_Method {
+	class Ubac_Shipping_Method extends WC_Shipping_Method {
 
 		/**
 		 * Constructor.
@@ -104,7 +104,7 @@ function dahu_weight_shipping_method_init() {
 		 */
 		public function __construct( $instance_id = 0 ) {
 
-			$this->id                 = DAHU_WEIGHT_SHIPPING_METHOD_ID;
+			$this->id                 = UBAC_SHIPPING_METHOD_ID;
 			$this->instance_id        = absint( $instance_id );
 			$this->method_title       = __( 'Weight-based shipping', 'ubac-shipping' );
 			$this->method_description = __( 'Prices a shipment from the real weight of the cart, using a price grid belonging to this zone, with per-class rules for flat costs, free shipping and exclusions.', 'ubac-shipping' );
@@ -202,7 +202,7 @@ function dahu_weight_shipping_method_init() {
 					'title'       => __( 'Weight price grid', 'ubac-shipping' ),
 					'type'        => 'textarea',
 					'description' => __( 'One bracket per line, as <code>min-max:price</code> — for example <code>0-2:18</code>. Weights in the shop\'s weight unit, prices excluding tax. The minimum is EXCLUDED from the bracket and the maximum INCLUDED, so "0-2:18" covers anything above 0 and up to 2. Past the last bracket, that bracket\'s price applies. This grid belongs to this zone only.', 'ubac-shipping' ),
-					'default'     => dahu_weight_shipping_format_grid( dahu_weight_shipping_default_grid() ),
+					'default'     => ubac_shipping_format_grid( ubac_shipping_default_grid() ),
 					'css'         => 'width: 320px; height: 180px; font-family: monospace;',
 				),
 
@@ -335,7 +335,7 @@ function dahu_weight_shipping_method_init() {
 		public function validate_weight_grid_field( $key, $value ) {
 
 			$errors = array();
-			$grid   = dahu_weight_shipping_parse_grid( $value, $errors );
+			$grid   = ubac_shipping_parse_grid( $value, $errors );
 
 			$can_report = class_exists( 'WC_Admin_Settings' );
 
@@ -368,7 +368,7 @@ function dahu_weight_shipping_method_init() {
 			 *
 			 * Clearing a field is an ordinary thing to do while reconfiguring,
 			 * and the outcome costs the shop money on every order. It is also
-			 * precisely what `dahu_weight_shipping_price_for_weight()` says it
+			 * precisely what `ubac_shipping_price_for_weight()` says it
 			 * exists to avoid: a plausible-looking number that is invisibly
 			 * wrong.
 			 *
@@ -385,7 +385,7 @@ function dahu_weight_shipping_method_init() {
 				);
 			}
 
-			return dahu_weight_shipping_format_grid( $grid );
+			return ubac_shipping_format_grid( $grid );
 		}
 
 		/* -----------------------------------------------------------------
@@ -429,7 +429,7 @@ function dahu_weight_shipping_method_init() {
 
 			$errors = array();
 
-			return dahu_weight_shipping_parse_grid( $this->get_option( 'weight_grid', '' ), $errors );
+			return ubac_shipping_parse_grid( $this->get_option( 'weight_grid', '' ), $errors );
 		}
 
 		/**
@@ -650,7 +650,7 @@ function dahu_weight_shipping_method_init() {
 			$grid_weight = $this->get_grid_weight( $package, $package_classes );
 
 			$cost = $grid_weight > 0
-				? dahu_weight_shipping_price_for_weight( $grid_weight, $this->get_weight_grid() )
+				? ubac_shipping_price_for_weight( $grid_weight, $this->get_weight_grid() )
 				: 0.0;
 
 			/*
@@ -697,7 +697,7 @@ function dahu_weight_shipping_method_init() {
 			 * contents carry no parent key.
 			 */
 			$original_package = $package;
-			$package          = dahu_weight_shipping_billable_package( $package );
+			$package          = ubac_shipping_billable_package( $package );
 
 			$package_classes = $this->get_package_classes( $package );
 
@@ -735,9 +735,9 @@ function dahu_weight_shipping_method_init() {
 			 *
 			 * @param float                       $cost    Cost excluding tax.
 			 * @param array                       $package Billable package.
-			 * @param Dahu_Weight_Shipping_Method $method  The method instance.
+			 * @param Ubac_Shipping_Method $method  The method instance.
 			 */
-			$cost = (float) apply_filters( 'dahu_weight_shipping_cost', $cost, $package, $this );
+			$cost = (float) apply_filters( 'ubac_shipping_cost', $cost, $package, $this );
 
 			// 5. Offer the rate, switching the label when free.
 			$title_free = (string) $this->get_option( 'title_free', '' );

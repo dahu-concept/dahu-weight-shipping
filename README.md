@@ -1,4 +1,4 @@
-# Dahu Weight Shipping
+# Ubac Weight Shipping
 
 A weight-based WooCommerce shipping method, configurable per zone, with
 per-class rules and one-click shipping lines on manually created orders.
@@ -64,8 +64,8 @@ figure shown and the figure billed cannot disagree.
 
 A kit sold as one product is one parcel. Components are folded back into their
 kit on both sides — cart and order — so the kit is weighed and billed once.
-Recognised through the meta each plugin publishes: Dahu Composite
-(`dahu_kit_parent`), WooCommerce Composite Products (`composite_parent`,
+Recognised through the meta each plugin publishes: Ubac Composite
+(`ubac_kit_parent`), WooCommerce Composite Products (`composite_parent`,
 `_composite_*`) and WooCommerce Product Bundles (through its own
 `get_product_from_item` filter).
 
@@ -74,7 +74,7 @@ Recognised through the meta each plugin publishes: Dahu Composite
 ### Pricing another carrier on manual orders
 
 ```php
-add_filter( 'dahu_weight_shipping_calculators', function ( $calculators ) {
+add_filter( 'ubac_shipping_calculators', function ( $calculators ) {
 	$calculators['my_carrier'] = function ( $order, $instance_id, $items_with_qty ) {
 		// Return the cost excluding tax, plus any lines explaining it,
 		// or a WP_Error with code 'manual' or 'no_rate'.
@@ -94,11 +94,11 @@ so one order cannot come out free on one method and charged on another.
 
 | Hook | Kind | Purpose |
 |---|---|---|
-| `dahu_weight_shipping_cost` | filter | Last word on a cost, after grid, class costs and free shipping. For a surcharge nothing here models |
-| `dahu_weight_shipping_default_grid` | filter | The grid offered on a NEW instance; never read by a configured one |
-| `dahu_weight_shipping_calculators` | filter | Method id => callable, for manual orders |
-| `dahu_weight_shipping_watched_countries` | filter | Countries the "no method available" guard watches. Empty, the default, means all |
-| `dahu_weight_shipping_no_rate_available` | action | Fires when a cart ends up with no shipping method at all |
+| `ubac_shipping_cost` | filter | Last word on a cost, after grid, class costs and free shipping. For a surcharge nothing here models |
+| `ubac_shipping_default_grid` | filter | The grid offered on a NEW instance; never read by a configured one |
+| `ubac_shipping_calculators` | filter | Method id => callable, for manual orders |
+| `ubac_shipping_watched_countries` | filter | Countries the "no method available" guard watches. Empty, the default, means all |
+| `ubac_shipping_no_rate_available` | action | Fires when a cart ends up with no shipping method at all |
 
 ## Deliberate limits
 
@@ -115,7 +115,7 @@ WooCommerce deletes with its zone. The only thing written elsewhere is a flag
 on a shipping line whose cost was edited by hand, and uninstalling keeps it —
 deleting it would quietly undo that decision, and the next recalculation would
 overwrite a price somebody corrected on purpose. Set the
-`dahu_weight_shipping_remove_data_on_uninstall` option to remove those flags
+`ubac_shipping_remove_data_on_uninstall` option to remove those flags
 too.
 
 ## Licence

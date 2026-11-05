@@ -16,10 +16,10 @@
  * element and trusted to survive; and every request here is slow enough to
  * be felt, so none is made that could have been avoided.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
-/* global jQuery, dahuWeightShipping */
+/* global jQuery, ubacWeightShipping */
 
 ( function ( $, settings ) {
 	'use strict';
@@ -157,7 +157,7 @@
 			settings.ajaxUrl,
 			$.extend(
 				{
-					action: 'dahu_weight_shipping_' + action,
+					action: 'ubac_shipping_' + action,
 					nonce: settings.nonce
 				},
 				data || {}
@@ -253,14 +253,14 @@
 	function notice( message, tone, options ) {
 		options = options || {};
 
-		$( '.dahu-ws-notice' ).remove();
+		$( '.ubac-ws-notice' ).remove();
 
-		var $notice = $( '<div class="dahu-ws-notice" role="status" aria-live="polite"></div>' )
-			.addClass( 'dahu-ws-notice--' + ( tone || 'info' ) );
+		var $notice = $( '<div class="ubac-ws-notice" role="status" aria-live="polite"></div>' )
+			.addClass( 'ubac-ws-notice--' + ( tone || 'info' ) );
 
-		$( '<div class="dahu-ws-notice__text"></div>' ).text( message ).appendTo( $notice );
+		$( '<div class="ubac-ws-notice__text"></div>' ).text( message ).appendTo( $notice );
 
-		$( '<button type="button" class="dahu-ws-notice__close"></button>' )
+		$( '<button type="button" class="ubac-ws-notice__close"></button>' )
 			.attr( 'aria-label', i18n.dismiss || 'Dismiss' )
 			.on( 'click', function () {
 				$notice.remove();
@@ -289,7 +289,7 @@
 	 * @return {void}
 	 */
 	function clearNotice() {
-		$( '.dahu-ws-notice' ).remove();
+		$( '.ubac-ws-notice' ).remove();
 	}
 
 	/**
@@ -303,7 +303,7 @@
 	 * @return {jQuery}
 	 */
 	function busyNotice( message ) {
-		return notice( message, 'info', { persist: true } ).addClass( 'dahu-ws-notice--busy' );
+		return notice( message, 'info', { persist: true } ).addClass( 'ubac-ws-notice--busy' );
 	}
 
 	/**
@@ -1001,8 +1001,8 @@
 	 * @return {void}
 	 */
 	function closePicker() {
-		$( '.dahu-ws-picker' ).remove();
-		$( document ).off( 'keydown.dahuWsPicker click.dahuWsPicker' );
+		$( '.ubac-ws-picker' ).remove();
+		$( document ).off( 'keydown.ubacWsPicker click.ubacWsPicker' );
 	}
 
 	/**
@@ -1022,29 +1022,29 @@
 	function showMethodPicker( payload, $button ) {
 		closePicker();
 
-		var $picker = $( '<div class="dahu-ws-picker" role="dialog"></div>' )
+		var $picker = $( '<div class="ubac-ws-picker" role="dialog"></div>' )
 			.attr( 'aria-label', i18n.chooseMethod );
 
-		var $header = $( '<div class="dahu-ws-picker__header"></div>' );
+		var $header = $( '<div class="ubac-ws-picker__header"></div>' );
 
-		$( '<span class="dahu-ws-picker__title"></span>' ).text( i18n.chooseMethod ).appendTo( $header );
+		$( '<span class="ubac-ws-picker__title"></span>' ).text( i18n.chooseMethod ).appendTo( $header );
 
 		if ( payload.zoneName ) {
-			$( '<span class="dahu-ws-picker__zone"></span>' )
+			$( '<span class="ubac-ws-picker__zone"></span>' )
 				.text( format( i18n.zoneLabel, payload.zoneName ) )
 				.appendTo( $header );
 		}
 
 		$header.appendTo( $picker );
 
-		var $list = $( '<ul class="dahu-ws-picker__list"></ul>' );
+		var $list = $( '<ul class="ubac-ws-picker__list"></ul>' );
 
 		payload.methods.forEach( function ( method ) {
-			var $entry = $( '<button type="button" class="dahu-ws-picker__option"></button>' );
+			var $entry = $( '<button type="button" class="ubac-ws-picker__option"></button>' );
 
-			$( '<span class="dahu-ws-picker__option-title"></span>' ).text( method.title ).appendTo( $entry );
+			$( '<span class="ubac-ws-picker__option-title"></span>' ).text( method.title ).appendTo( $entry );
 
-			$( '<span class="dahu-ws-picker__option-hint"></span>' )
+			$( '<span class="ubac-ws-picker__option-hint"></span>' )
 				.addClass( method.calculable ? 'is-auto' : 'is-manual' )
 				.text( method.calculable ? i18n.autoPriced : i18n.manualPriced )
 				.appendTo( $entry );
@@ -1060,9 +1060,9 @@
 		$list.appendTo( $picker );
 		$button.after( $picker );
 
-		$picker.find( '.dahu-ws-picker__option' ).first().trigger( 'focus' );
+		$picker.find( '.ubac-ws-picker__option' ).first().trigger( 'focus' );
 
-		$( document ).on( 'keydown.dahuWsPicker', function ( event ) {
+		$( document ).on( 'keydown.ubacWsPicker', function ( event ) {
 			if ( 'Escape' === event.key ) {
 				closePicker();
 				$button.trigger( 'focus' );
@@ -1072,8 +1072,8 @@
 		// Bound on the next tick so the click that opened the picker does not
 		// immediately close it.
 		window.setTimeout( function () {
-			$( document ).on( 'click.dahuWsPicker', function ( event ) {
-				if ( ! $( event.target ).closest( '.dahu-ws-picker, .dahu-ws-add-shipping' ).length ) {
+			$( document ).on( 'click.ubacWsPicker', function ( event ) {
+				if ( ! $( event.target ).closest( '.ubac-ws-picker, .ubac-ws-add-shipping' ).length ) {
 					closePicker();
 				}
 			} );
@@ -1095,7 +1095,7 @@
 	function addButton() {
 		var $container = $( '.wc-order-bulk-actions .add-items' );
 
-		if ( ! $container.length || $container.find( '.dahu-ws-add-shipping' ).length ) {
+		if ( ! $container.length || $container.find( '.ubac-ws-add-shipping' ).length ) {
 			return;
 		}
 
@@ -1105,7 +1105,7 @@
 			return;
 		}
 
-		var $button = $( '<button type="button" class="button dahu-ws-add-shipping"></button>' )
+		var $button = $( '<button type="button" class="button ubac-ws-add-shipping"></button>' )
 			.text( i18n.addShipping );
 
 		// WooCommerce rebuilds the panel while a line is being created, so
@@ -1124,7 +1124,7 @@
 			}
 
 			// Picker already open: a second click closes it.
-			if ( $( '.dahu-ws-picker' ).length ) {
+			if ( $( '.ubac-ws-picker' ).length ) {
 				closePicker();
 				return;
 			}
@@ -1177,7 +1177,7 @@
 		 *
 		 * The hiding is PURELY visual; see createShippingLine.
 		 */
-		$( 'body' ).addClass( 'dahu-ws-has-add-shipping' );
+		$( 'body' ).addClass( 'ubac-ws-has-add-shipping' );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -1194,15 +1194,15 @@
 	 * @return {void}
 	 */
 	function setOrderWeight( display ) {
-		var $value = $( '#dahu-ws-weight-value' );
+		var $value = $( '#ubac-ws-weight-value' );
 
 		if ( ! $value.length || 'undefined' === typeof display || null === display ) {
 			return;
 		}
 
 		$value.text( display );
-		$( '#dahu-ws-weight-panel' ).removeClass( 'is-stale' );
-		$( '#dahu-ws-weight-stale' ).prop( 'hidden', true );
+		$( '#ubac-ws-weight-panel' ).removeClass( 'is-stale' );
+		$( '#ubac-ws-weight-stale' ).prop( 'hidden', true );
 	}
 
 	/**
@@ -1216,18 +1216,18 @@
 	 * @return {void}
 	 */
 	function markOrderWeightStale() {
-		if ( ! $( '#dahu-ws-weight-value' ).length ) {
+		if ( ! $( '#ubac-ws-weight-value' ).length ) {
 			return;
 		}
 
-		$( '#dahu-ws-weight-panel' ).addClass( 'is-stale' );
-		$( '#dahu-ws-weight-stale' ).prop( 'hidden', false );
+		$( '#ubac-ws-weight-panel' ).addClass( 'is-stale' );
+		$( '#ubac-ws-weight-stale' ).prop( 'hidden', false );
 	}
 
 	$( document ).on( 'change keyup', '#order_line_items input.quantity', markOrderWeightStale );
 
 	// The only network call dedicated to this panel.
-	$( document ).on( 'click', '#dahu-ws-weight-refresh', function ( event ) {
+	$( document ).on( 'click', '#ubac-ws-weight-refresh', function ( event ) {
 		event.preventDefault();
 
 		var $button = $( this );
@@ -1292,4 +1292,4 @@
 			timer = window.setTimeout( addButton, 100 );
 		} ).observe( $panel.get( 0 ), { childList: true, subtree: true } );
 	} );
-}( jQuery, window.dahuWeightShipping ) );
+}( jQuery, window.ubacWeightShipping ) );

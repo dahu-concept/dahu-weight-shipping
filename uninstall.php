@@ -18,10 +18,10 @@
  * prices that had been corrected deliberately.
  *
  * A shop that genuinely wants them gone sets the
- * `dahu_weight_shipping_remove_data_on_uninstall` option to a truthy value
+ * `ubac_shipping_remove_data_on_uninstall` option to a truthy value
  * before deleting the plugin.
  *
- * @package DahuWeightShipping
+ * @package UbacShipping
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
@@ -34,21 +34,21 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
  *
  * @return void
  */
-function dahu_weight_shipping_uninstall_site() {
+function ubac_shipping_uninstall_site() {
 
 	// The welcome screen's own three flags.
 	//
 	// They are interface state, not the shop's data, which is why they sit
 	// BEFORE any “remove data on uninstall” guard: whatever a shop chose to
-	// keep, a reinstall has to greet it again. `includes/dahu-welcome.php`
+	// keep, a reinstall has to greet it again. `includes/ubac-welcome.php`
 	// writes them with update_option(), so they outlive the plugin unless
 	// they are deleted here — and the welcome screen and the guided tour
 	// would then stay silent for good, with nothing on screen to explain why.
-	delete_option( 'dahu_welcome_seen_dahu-weight-shipping' );
-	delete_option( 'dahu_welcome_pending_dahu-weight-shipping' );
-	delete_option( 'dahu_welcome_tour_dahu-weight-shipping' );
+	delete_option( 'ubac_welcome_seen_ubac-shipping' );
+	delete_option( 'ubac_welcome_pending_ubac-shipping' );
+	delete_option( 'ubac_welcome_tour_ubac-shipping' );
 
-	if ( ! get_option( 'dahu_weight_shipping_remove_data_on_uninstall' ) ) {
+	if ( ! get_option( 'ubac_shipping_remove_data_on_uninstall' ) ) {
 		return;
 	}
 
@@ -57,12 +57,12 @@ function dahu_weight_shipping_uninstall_site() {
 	$table = $wpdb->prefix . 'woocommerce_order_itemmeta';
 
 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange -- order item meta has no API for deleting one key across every line, and this runs once, on uninstall.
-	$wpdb->delete( $table, array( 'meta_key' => '_dahu_weight_shipping_manual_cost' ) );
+	$wpdb->delete( $table, array( 'meta_key' => '_ubac_shipping_manual_cost' ) );
 
-	delete_option( 'dahu_weight_shipping_remove_data_on_uninstall' );
+	delete_option( 'ubac_shipping_remove_data_on_uninstall' );
 }
 
-dahu_weight_shipping_uninstall_site();
+ubac_shipping_uninstall_site();
 
 /*
  * On a multisite install with this plugin activated across the network, each
@@ -88,7 +88,7 @@ if ( is_multisite() ) {
 
 	foreach ( $site_ids as $site_id ) {
 		switch_to_blog( $site_id );
-		dahu_weight_shipping_uninstall_site();
+		ubac_shipping_uninstall_site();
 		restore_current_blog();
 	}
 }
