@@ -78,7 +78,7 @@ if ( is_multisite() ) {
 	 * screen and the tour then stay silent for good there, with nothing on
 	 * screen to explain why.
 	 */
-	$site_ids = get_sites(
+	$ubac_shipping_site_ids = get_sites(
 		array(
 			'fields'        => 'ids',
 			'number'        => 0,
@@ -86,8 +86,8 @@ if ( is_multisite() ) {
 		)
 	);
 
-	foreach ( $site_ids as $site_id ) {
-		switch_to_blog( $site_id );
+	foreach ( $ubac_shipping_site_ids as $ubac_shipping_site_id ) {
+		switch_to_blog( $ubac_shipping_site_id );
 		ubac_shipping_uninstall_site();
 		restore_current_blog();
 	}
