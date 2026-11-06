@@ -4,7 +4,7 @@ Tags: weight shipping, table rate, shipping zones, shipping class, shipping
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -174,6 +174,10 @@ admin.
 
 == Changelog ==
 
+= 1.1.4 =
+* Changed: the compiled French catalogue now travels in the package. It was left out on the grounds that the directory serves language packs, which is true only for a copy installed from the directory and only once translations have been imported: a copy installed by hand showed English with a catalogue that was fully translated.
+* Changed: the French readme moves under docs/, so the directory's checker no longer reports an unexpected markdown file at the plugin root.
+
 = 1.1.3 =
 * Changed: the note above the read of the posted quantities claimed that every caller verifies the nonce. Three of the four do; the fourth is the weight panel, which writes nothing and only displays a weight. The note now says what the code does.
 * Changed: WordPress 6.2 is now the floor, as it is for the rest of the family.
@@ -195,6 +199,9 @@ admin.
 * First public release.
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+French now works on a copy installed by hand: the compiled catalogue travels in the package. The French readme moves under docs/.
 
 = 1.1.3 =
 Documentation and house-keeping only, no change of behaviour. WordPress 6.2 is now the floor.
