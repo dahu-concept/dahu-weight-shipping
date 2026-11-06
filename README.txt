@@ -4,7 +4,7 @@ Tags: weight shipping, table rate, shipping zones, shipping class, shipping
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -174,6 +174,10 @@ admin.
 
 == Changelog ==
 
+= 1.1.3 =
+* Changed: the note above the read of the posted quantities claimed that every caller verifies the nonce. Three of the four do; the fourth is the weight panel, which writes nothing and only displays a weight. The note now says what the code does.
+* Changed: WordPress 6.2 is now the floor, as it is for the rest of the family.
+
 = 1.1.2 =
 * Clearing the weight price grid no longer happens in silence. The grid is still saved -- pricing by shipping class alone is a valid setup -- but when no class carries a cost either, the settings screen now says that the method will quote 0 for every order, and what to do about it.
 
@@ -191,6 +195,9 @@ admin.
 * First public release.
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+Documentation and house-keeping only, no change of behaviour. WordPress 6.2 is now the floor.
 
 = 1.0.1 =
 Fixes a shipping line that could be attached to a deleted zone instance, and a refusal that was not shown.
