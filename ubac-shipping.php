@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Ubac Weight Shipping
  * Description:       A weight-based WooCommerce shipping method configurable per zone, with a per-zone price grid, shipping-class rules, and one-click shipping lines on manually created orders.
- * Version:           1.1.4
+ * Version:           1.1.5
  * Author:            Hugo Vial-Jaime
  * Author URI:        https://dahu-concept.fr
  * License:           MIT
@@ -19,7 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'UBAC_SHIPPING_VERSION', '1.1.4' );
+define( 'UBAC_SHIPPING_VERSION', '1.1.5' );
 define( 'UBAC_SHIPPING_FILE', __FILE__ );
 define( 'UBAC_SHIPPING_PATH', plugin_dir_path( __FILE__ ) );
 define( 'UBAC_SHIPPING_URL', plugin_dir_url( __FILE__ ) );

@@ -4,13 +4,30 @@ Tags: weight shipping, table rate, shipping zones, shipping class, shipping
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
 Price WooCommerce shipping on the real weight of the cart, with a grid per zone and class rules — plus one-click shipping lines on manual orders.
 
 == Description ==
+
+= Why another weight-based shipping plugin? =
+
+The grid itself is not the differentiator — plenty of plugins price a cart by
+weight. Two things here are harder to find:
+
+* **You paste the carrier's own table**, one bracket per line, and that is the
+  whole configuration. No modelling the catalogue first, no rule builder to
+  learn before it will quote anything.
+* **It works on orders created by hand in the admin**, which is where
+  table-rate plugins usually stop: they live in the cart and have nothing to
+  say about an order a shop typed in itself. Here the shipping line is priced
+  in one click from the same grid — and a cost you edited by hand is marked as
+  such and left alone by the next recalculation.
+
+The second point is the reason this exists. A shop that takes orders by phone
+spends more time in the admin than its customers spend in the cart.
 
 A carrier contract is usually a table: up to two kilos, this much; up to five,
 that much. Expressing that in WooCommerce means either a flat rate that is
@@ -174,6 +191,9 @@ admin.
 
 == Changelog ==
 
+= 1.1.5 =
+* Changed: the readme now answers, in its own section, why this plugin exists alongside the other weight-based shipping plugins -- the carrier's own table pasted as is, and shipping lines priced on orders created by hand in the admin.
+
 = 1.1.4 =
 * Changed: the compiled French catalogue now travels in the package. It was left out on the grounds that the directory serves language packs, which is true only for a copy installed from the directory and only once translations have been imported: a copy installed by hand showed English with a catalogue that was fully translated.
 * Changed: the French readme moves under docs/, so the directory's checker no longer reports an unexpected markdown file at the plugin root.
@@ -199,6 +219,9 @@ admin.
 * First public release.
 
 == Upgrade Notice ==
+
+= 1.1.5 =
+Documentation only: the readme now says what this plugin does that the other weight-shipping plugins do not.
 
 = 1.1.4 =
 French now works on a copy installed by hand: the compiled catalogue travels in the package. The French readme moves under docs/.
