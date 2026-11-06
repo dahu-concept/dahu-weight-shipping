@@ -115,6 +115,47 @@ add_filter(
 	}
 );
 
+/**
+ * The uninstall choice, on WooCommerce's own Shipping options screen.
+ *
+ * This plugin has no settings screen of its own, on purpose (see above), so
+ * the one global choice it does need goes on WooCommerce's screen rather than
+ * in a second place that could disagree with the first. WooCommerce's settings
+ * API writes the field's `id` straight to an option of that name, which is the
+ * option `uninstall.php` reads.
+ *
+ * Off by default, and the description says what is lost, because the data in
+ * question is a per-line decision a human made by hand.
+ *
+ * @param array $settings WooCommerce's shipping settings fields.
+ * @return array
+ */
+function ubac_shipping_uninstall_setting( $settings ) {
+	$settings[] = array(
+		'title' => __( 'Ubac Weight Shipping', 'ubac-shipping' ),
+		'type'  => 'title',
+		'id'    => 'ubac_shipping_uninstall_title',
+	);
+
+	$settings[] = array(
+		'title'    => __( 'Uninstalling', 'ubac-shipping' ),
+		'desc'     => __( "Delete this plugin's data when the plugin is deleted", 'ubac-shipping' ),
+		'desc_tip' => __( 'Off, and worth leaving off. What goes is the manually corrected shipping cost on every order line that has one — a price someone set by hand because the calculated one was wrong. Nothing reads those values without this plugin, and deleting the plugin is usually a step in reinstalling it.', 'ubac-shipping' ),
+		'id'       => 'ubac_shipping_delete_data_on_uninstall',
+		'type'     => 'checkbox',
+		'default'  => 'no',
+	);
+
+	$settings[] = array(
+		'type' => 'sectionend',
+		'id'   => 'ubac_shipping_uninstall_title',
+	);
+
+	return $settings;
+}
+
+add_filter( 'woocommerce_shipping_settings', 'ubac_shipping_uninstall_setting' );
+
 add_filter(
 	'plugin_row_meta',
 	static function ( $links, $file ) {
