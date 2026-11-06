@@ -292,7 +292,6 @@ function ubac_shipping_ajax_set_instance() {
 	 * possible sentence about an AJAX entry point, and it is untrue. The
 	 * guard is named here because it cannot be seen from here. */
 	// phpcs:disable WordPress.Security.NonceVerification.Missing -- see above.
-	// phpcs:disable WordPress.Security.NonceVerification.Missing -- see above.
 	$instance_id  = isset( $_POST['instance_id'] ) ? absint( $_POST['instance_id'] ) : 0;
 	$method_id    = isset( $_POST['method_id'] ) ? sanitize_text_field( wp_unslash( $_POST['method_id'] ) ) : '';
 	$method_title = isset( $_POST['method_title'] ) ? sanitize_text_field( wp_unslash( $_POST['method_title'] ) ) : '';

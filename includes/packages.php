@@ -279,7 +279,16 @@ function ubac_shipping_with_bundle_view( $callback ) {
  */
 function ubac_shipping_collect_items_with_live_qty( $order ) {
 
-	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- every caller verifies the nonce before reaching this point.
+	// The three callers that act on this value are the AJAX endpoints in
+	// order-ajax.php, and each one goes through ubac_shipping_check_request()
+	// first. The fourth caller, the weight panel in order-screen.php, writes
+	// nothing: it reads the posted quantities only to show a weight matching
+	// what the operator currently has on screen.
+	//
+	// The directive sits on the line below and nowhere else: it covers the
+	// next line only, so an explanation written above it would push it out of
+	// range and suppress nothing.
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- see just above.
 	$live_items_raw = isset( $_POST['live_items'] ) ? wp_unslash( $_POST['live_items'] ) : '';
 	$live_items     = is_string( $live_items_raw ) && '' !== $live_items_raw
 		? json_decode( $live_items_raw, true )
