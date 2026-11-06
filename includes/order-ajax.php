@@ -283,9 +283,20 @@ function ubac_shipping_ajax_set_instance() {
 	$order = ubac_shipping_request_order();
 	$item  = ubac_shipping_request_shipping_item( $order );
 
+	/* THE NONCE IS CHECKED, IN THE HELPER CALLED ABOVE.
+	 *
+	 * Each of this file's five AJAX entry points begins with
+	 * ubac_shipping_check_request(), which calls check_ajax_referer() and
+	 * THEN the capability check. The sniff does not follow into the helper
+	 * and so reports an AJAX file "without nonce verification" -- the worst
+	 * possible sentence about an AJAX entry point, and it is untrue. The
+	 * guard is named here because it cannot be seen from here. */
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- see above.
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- see above.
 	$instance_id  = isset( $_POST['instance_id'] ) ? absint( $_POST['instance_id'] ) : 0;
 	$method_id    = isset( $_POST['method_id'] ) ? sanitize_text_field( wp_unslash( $_POST['method_id'] ) ) : '';
 	$method_title = isset( $_POST['method_title'] ) ? sanitize_text_field( wp_unslash( $_POST['method_title'] ) ) : '';
+	// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 	if ( ! $instance_id ) {
 		wp_send_json_error( array( 'message' => __( 'No shipping zone instance was given.', 'ubac-shipping' ) ) );
@@ -369,6 +380,8 @@ function ubac_shipping_ajax_zone_methods() {
 
 	ubac_shipping_check_request();
 
+	// Same guard: ubac_shipping_check_request() has just been called.
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- see ubac_shipping_check_request().
 	$country = isset( $_POST['country'] ) ? sanitize_text_field( wp_unslash( $_POST['country'] ) ) : '';
 
 	$zone = WC_Shipping_Zones::get_zone_matching_package(
