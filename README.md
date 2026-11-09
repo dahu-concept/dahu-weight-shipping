@@ -1,4 +1,4 @@
-# Ubac Weight Shipping
+# DahuConcept Weight Shipping
 
 A weight-based WooCommerce shipping method, configurable per zone, with
 per-class rules and one-click shipping lines on manually created orders.
@@ -64,7 +64,7 @@ figure shown and the figure billed cannot disagree.
 
 A kit sold as one product is one parcel. Components are folded back into their
 kit on both sides — cart and order — so the kit is weighed and billed once.
-Recognised through the meta each plugin publishes: Ubac Composite
+Recognised through the meta each plugin publishes: DahuConcept Composite Products
 (`ubac_kit_parent`), WooCommerce Composite Products (`composite_parent`,
 `_composite_*`) and WooCommerce Product Bundles (through its own
 `get_product_from_item` filter).

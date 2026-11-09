@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit;
  * Cart key of the kit an item belongs to, or '' when it belongs to none.
  *
  * Two layouts are recognised, by the meta each plugin writes:
- * `ubac_kit_parent` (Ubac Composite) and `composite_parent` (WooCommerce
+ * `ubac_kit_parent` (DahuConcept Composite Products) and `composite_parent` (WooCommerce
  * Composite Products). Both mean the same thing, and both are read rather
  * than one being preferred: a shop may well run only one of them, and which
  * one must not change the price.

@@ -1,4 +1,4 @@
-# Ubac Weight Shipping
+# DahuConcept Weight Shipping
 
 Une méthode de livraison WooCommerce au poids, configurable par zone, avec des
 règles par classe de livraison et des lignes de livraison en un clic sur les
@@ -72,7 +72,7 @@ pour que le chiffre montré et le chiffre facturé ne puissent pas diverger.
 Un kit vendu comme un seul produit est un seul colis. Les composants sont
 rattachés à leur kit des deux côtés — panier et commande — pour que le kit soit
 pesé et facturé une fois. Reconnus par la méta que chaque extension publie :
-Ubac Composite (`ubac_kit_parent`), WooCommerce Composite Products
+DahuConcept Composite Products (`ubac_kit_parent`), WooCommerce Composite Products
 (`composite_parent`, `_composite_*`) et WooCommerce Product Bundles (par son
 propre filtre `get_product_from_item`).
 

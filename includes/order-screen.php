@@ -63,7 +63,7 @@ function ubac_shipping_register_weight_panel() {
 	foreach ( ubac_shipping_order_screen_ids() as $screen ) {
 		add_meta_box(
 			'ubac_shipping_order_weight',
-			__( 'Shipping weight', 'ubac-shipping' ),
+			__( 'Shipping weight', 'dahuconcept-weight-shipping' ),
 			'ubac_shipping_render_weight_panel',
 			$screen,
 			'side',
@@ -110,11 +110,11 @@ function ubac_shipping_render_weight_panel( $post_or_order ) {
 			<span class="ubac-ws-panel__unit"><?php echo esc_html( $unit ); ?></span>
 		</p>
 		<p class="ubac-ws-panel__stale" id="ubac-ws-weight-stale" hidden>
-			<?php esc_html_e( 'Quantities have changed on screen, so this weight is out of date.', 'ubac-shipping' ); ?>
+			<?php esc_html_e( 'Quantities have changed on screen, so this weight is out of date.', 'dahuconcept-weight-shipping' ); ?>
 		</p>
 		<p class="ubac-ws-panel__actions">
 			<button type="button" class="ubac-ui-btn" id="ubac-ws-weight-refresh">
-				<?php esc_html_e( 'Refresh', 'ubac-shipping' ); ?>
+				<?php esc_html_e( 'Refresh', 'dahuconcept-weight-shipping' ); ?>
 			</button>
 		</p>
 		<p class="ubac-ws-panel__note">
@@ -129,10 +129,10 @@ function ubac_shipping_render_weight_panel( $post_or_order ) {
 			 */
 			if ( ! $items ) {
 				echo '<span class="ubac-ui-hint">'
-					. esc_html__( 'No items on this order yet: the weight appears as soon as you add one.', 'ubac-shipping' )
+					. esc_html__( 'No items on this order yet: the weight appears as soon as you add one.', 'dahuconcept-weight-shipping' )
 					. '</span>';
 			} else {
-				esc_html_e( 'This is exactly the weight that enters the price grid, kit and bundle rules included.', 'ubac-shipping' );
+				esc_html_e( 'This is exactly the weight that enters the price grid, kit and bundle rules included.', 'dahuconcept-weight-shipping' );
 			}
 			?>
 		</p>
@@ -236,24 +236,24 @@ function ubac_shipping_enqueue_order_assets() {
 			'weightUnit'    => get_option( 'woocommerce_weight_unit', 'kg' ),
 			'currencySymbol' => get_woocommerce_currency_symbol(),
 			'i18n'          => array(
-				'addShipping'      => __( 'Add shipping', 'ubac-shipping' ),
-				'chooseMethod'     => __( 'Choose a shipping method', 'ubac-shipping' ),
-				'autoPriced'       => __( 'priced automatically', 'ubac-shipping' ),
-				'manualPriced'     => __( 'price typed in by hand', 'ubac-shipping' ),
+				'addShipping'      => __( 'Add shipping', 'dahuconcept-weight-shipping' ),
+				'chooseMethod'     => __( 'Choose a shipping method', 'dahuconcept-weight-shipping' ),
+				'autoPriced'       => __( 'priced automatically', 'dahuconcept-weight-shipping' ),
+				'manualPriced'     => __( 'price typed in by hand', 'dahuconcept-weight-shipping' ),
 				/* translators: %s: shipping zone name. */
-				'zoneLabel'        => __( 'Zone: %s', 'ubac-shipping' ),
-				'creatingLine'     => __( 'Creating the shipping line…', 'ubac-shipping' ),
-				'loadingMethods'   => __( 'Loading the shipping methods…', 'ubac-shipping' ),
-				'calculating'      => __( 'Working out the shipping cost…', 'ubac-shipping' ),
-				'refreshing'       => __( 'Calculating…', 'ubac-shipping' ),
-				'refresh'          => __( 'Refresh', 'ubac-shipping' ),
+				'zoneLabel'        => __( 'Zone: %s', 'dahuconcept-weight-shipping' ),
+				'creatingLine'     => __( 'Creating the shipping line…', 'dahuconcept-weight-shipping' ),
+				'loadingMethods'   => __( 'Loading the shipping methods…', 'dahuconcept-weight-shipping' ),
+				'calculating'      => __( 'Working out the shipping cost…', 'dahuconcept-weight-shipping' ),
+				'refreshing'       => __( 'Calculating…', 'dahuconcept-weight-shipping' ),
+				'refresh'          => __( 'Refresh', 'dahuconcept-weight-shipping' ),
 				/* translators: %s: formatted amount, currency included. */
-				'costCalculated'   => __( 'Shipping cost: %s', 'ubac-shipping' ),
-				'saveFirst'        => __( 'Please save this order once, with Create or Update, before adding a shipping line.', 'ubac-shipping' ),
-				'networkError'     => __( 'The shipping methods could not be loaded. Check the connection and try again.', 'ubac-shipping' ),
-				'noMethods'        => __( 'No shipping method is enabled for the zone matching this order\'s country. Check the country on the order, and the zone under WooCommerce, Settings, Shipping.', 'ubac-shipping' ),
-				'slowCreation'     => __( 'Creating the shipping line is taking longer than expected. Check whether an empty shipping line has appeared on the order and delete it before trying again.', 'ubac-shipping' ),
-				'dismiss'          => __( 'Dismiss', 'ubac-shipping' ),
+				'costCalculated'   => __( 'Shipping cost: %s', 'dahuconcept-weight-shipping' ),
+				'saveFirst'        => __( 'Please save this order once, with Create or Update, before adding a shipping line.', 'dahuconcept-weight-shipping' ),
+				'networkError'     => __( 'The shipping methods could not be loaded. Check the connection and try again.', 'dahuconcept-weight-shipping' ),
+				'noMethods'        => __( 'No shipping method is enabled for the zone matching this order\'s country. Check the country on the order, and the zone under WooCommerce, Settings, Shipping.', 'dahuconcept-weight-shipping' ),
+				'slowCreation'     => __( 'Creating the shipping line is taking longer than expected. Check whether an empty shipping line has appeared on the order and delete it before trying again.', 'dahuconcept-weight-shipping' ),
+				'dismiss'          => __( 'Dismiss', 'dahuconcept-weight-shipping' ),
 			),
 		)
 	);

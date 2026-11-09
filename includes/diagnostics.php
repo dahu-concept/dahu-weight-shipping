@@ -59,7 +59,7 @@ function ubac_shipping_warn_when_no_rate( $rates, $package ) {
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Deliberate, gated on WP_DEBUG_LOG just above.
 		error_log(
 			sprintf(
-				'[Ubac Weight Shipping] no shipping method available for this cart (destination: %s); check the shipping zone configuration.',
+				'[DahuConcept Weight Shipping] no shipping method available for this cart (destination: %s); check the shipping zone configuration.',
 				'' !== $country ? $country : 'unknown'
 			)
 		);

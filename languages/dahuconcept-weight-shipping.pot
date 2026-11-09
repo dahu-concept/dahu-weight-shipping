@@ -2,16 +2,16 @@
 # This file is distributed under the MIT licence.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ubac Weight Shipping\n"
+"Project-Id-Version: DahuConcept Weight Shipping\n"
 "Report-Msgid-Bugs-To: https://dahu-concept.fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2026-10-23 14:32+0000\n"
-"X-Domain: ubac-shipping\n"
+"PO-Revision-Date: 2026-11-09 07:28+0000\n"
+"X-Domain: dahuconcept-weight-shipping\n"
 
 #. translators: 1: shipping method name, 2: zone instance id. */
-#: includes/order-ajax.php:402
+#: includes/order-ajax.php:414
 msgid "%1$s #%2$d"
 msgstr ""
 
@@ -27,7 +27,7 @@ msgstr ""
 msgid "As soon as one product in the cart carries one of these classes, NO weight at all enters the grid — not its own, and not that of the items alongside it. Only the flat class costs below are charged. This covers the case of a product whose shipping is already priced into it and which carries whatever ships with it."
 msgstr ""
 
-#: includes/order-screen.php:247
+#: includes/order-screen.php:248
 msgid "Calculating…"
 msgstr ""
 
@@ -51,11 +51,11 @@ msgstr ""
 msgid "Classes that cancel the weight grid"
 msgstr ""
 
-#: ubac-shipping.php:235
+#: dahuconcept-weight-shipping.php:271
 msgid "Click it once the quantities have changed."
 msgstr ""
 
-#: ubac-shipping.php:198
+#: dahuconcept-weight-shipping.php:234
 msgid "Computed from the lines"
 msgstr ""
 
@@ -63,19 +63,27 @@ msgstr ""
 msgid "Cost for \"%s\""
 msgstr ""
 
-#: includes/order-screen.php:254
+#: includes/order-screen.php:255
 msgid "Creating the shipping line is taking longer than expected. Check whether an empty shipping line has appeared on the order and delete it before trying again."
 msgstr ""
 
-#: includes/order-screen.php:244
+#: includes/order-screen.php:245
 msgid "Creating the shipping line…"
 msgstr ""
 
-#: includes/order-screen.php:255
+#: dahuconcept-weight-shipping.php:135
+msgid "DahuConcept Weight Shipping"
+msgstr ""
+
+#: dahuconcept-weight-shipping.php:142
+msgid "Delete this plugin's data when the plugin is deleted"
+msgstr ""
+
+#: includes/order-screen.php:256
 msgid "Dismiss"
 msgstr ""
 
-#: ubac-shipping.php:191
+#: dahuconcept-weight-shipping.php:227
 msgid "Done"
 msgstr ""
 
@@ -95,7 +103,7 @@ msgstr ""
 msgid "Hide if the cart contains"
 msgstr ""
 
-#: ubac-shipping.php:171
+#: dahuconcept-weight-shipping.php:207
 msgid "Keeps the order weight right, so the shipping price is too."
 msgstr ""
 
@@ -109,11 +117,11 @@ msgstr ""
 msgid "Line %1$d ignored (\"%2$s\"): the maximum weight must be greater than the minimum weight."
 msgstr ""
 
-#: includes/order-screen.php:245
+#: includes/order-screen.php:246
 msgid "Loading the shipping methods…"
 msgstr ""
 
-#: ubac-shipping.php:190
+#: dahuconcept-weight-shipping.php:226
 msgid "Next"
 msgstr ""
 
@@ -121,7 +129,7 @@ msgstr ""
 msgid "No items on this order yet: the weight appears as soon as you add one."
 msgstr ""
 
-#: includes/order-screen.php:253
+#: includes/order-screen.php:254
 msgid "No shipping method is enabled for the zone matching this order's country. Check the country on the order, and the zone under WooCommerce, Settings, Shipping."
 msgstr ""
 
@@ -129,15 +137,19 @@ msgstr ""
 msgid "No shipping method was found for that zone instance. It may have been removed from the zone since this line was created."
 msgstr ""
 
-#: includes/order-ajax.php:291
+#: includes/order-ajax.php:301
 msgid "No shipping zone instance was given."
+msgstr ""
+
+#: dahuconcept-weight-shipping.php:143
+msgid "Off, and worth leaving off. What goes is the manually corrected shipping cost on every order line that has one — a price someone set by hand because the calculated one was wrong. Nothing reads those values without this plugin, and deleting the plugin is usually a step in reinstalling it."
 msgstr ""
 
 #: includes/shipping-method.php:204
 msgid "One bracket per line, as <code>min-max:price</code> — for example <code>0-2:18</code>. Weights in the shop's weight unit, prices excluding tax. The minimum is EXCLUDED from the bracket and the maximum INCLUDED, so \"0-2:18\" covers anything above 0 and up to 2. Past the last bracket, that bracket's price applies. This grid belongs to this zone only."
 msgstr ""
 
-#: ubac-shipping.php:207
+#: dahuconcept-weight-shipping.php:243
 msgid "One button when the order changed."
 msgstr ""
 
@@ -149,7 +161,7 @@ msgstr ""
 msgid "Order not found."
 msgstr ""
 
-#: includes/order-screen.php:251
+#: includes/order-screen.php:252
 msgid "Please save this order once, with Create or Update, before adding a shipping line."
 msgstr ""
 
@@ -169,15 +181,15 @@ msgstr ""
 msgid "Quantities have changed on screen, so this weight is out of date."
 msgstr ""
 
-#: ubac-shipping.php:206
+#: dahuconcept-weight-shipping.php:242
 msgid "Recalculated on demand"
 msgstr ""
 
-#: includes/order-screen.php:117 includes/order-screen.php:248
+#: includes/order-screen.php:117 includes/order-screen.php:249
 msgid "Refresh"
 msgstr ""
 
-#: ubac-shipping.php:234
+#: dahuconcept-weight-shipping.php:270
 msgid "Refresh after edits"
 msgstr ""
 
@@ -189,7 +201,7 @@ msgstr ""
 msgid "Shipping class rules"
 msgstr ""
 
-#: includes/order-screen.php:250
+#: includes/order-screen.php:251
 msgid "Shipping cost: %s"
 msgstr ""
 
@@ -201,7 +213,7 @@ msgstr ""
 msgid "Shipping weight"
 msgstr ""
 
-#: ubac-shipping.php:116
+#: dahuconcept-weight-shipping.php:111
 msgid "Shipping zones"
 msgstr ""
 
@@ -209,15 +221,15 @@ msgstr ""
 msgid "Show only if the cart contains"
 msgstr ""
 
-#: ubac-shipping.php:203
+#: dahuconcept-weight-shipping.php:239
 msgid "Shown where somebody packing can check it."
 msgstr ""
 
-#: ubac-shipping.php:192
+#: dahuconcept-weight-shipping.php:228
 msgid "Skip"
 msgstr ""
 
-#: ubac-shipping.php:134
+#: dahuconcept-weight-shipping.php:170
 msgid "Support"
 msgstr ""
 
@@ -234,7 +246,7 @@ msgstr ""
 msgid "Taxable"
 msgstr ""
 
-#: includes/order-ajax.php:313
+#: includes/order-ajax.php:323
 msgid "That shipping zone instance no longer exists: it has been removed from its zone since this screen was opened. Reload the order and add the shipping line again."
 msgstr ""
 
@@ -242,7 +254,7 @@ msgstr ""
 msgid "The calculator for this shipping method returned nothing usable."
 msgstr ""
 
-#: ubac-shipping.php:229
+#: dahuconcept-weight-shipping.php:265
 msgid "The order weight"
 msgstr ""
 
@@ -250,15 +262,15 @@ msgstr ""
 msgid "The price for this shipping method has to be filled in by hand."
 msgstr ""
 
-#: includes/order-screen.php:252
+#: includes/order-screen.php:253
 msgid "The shipping methods could not be loaded. Check the connection and try again."
 msgstr ""
 
-#: ubac-shipping.php:199
+#: dahuconcept-weight-shipping.php:235
 msgid "The weight follows what is actually in the order."
 msgstr ""
 
-#: ubac-shipping.php:239
+#: dahuconcept-weight-shipping.php:275
 msgid "The weight that is priced"
 msgstr ""
 
@@ -266,7 +278,7 @@ msgstr ""
 msgid "This is exactly the weight that enters the price grid, kit and bundle rules included."
 msgstr ""
 
-#: ubac-shipping.php:240
+#: dahuconcept-weight-shipping.php:276
 msgid "This is the weight that enters the price grid."
 msgstr ""
 
@@ -302,7 +314,11 @@ msgstr ""
 msgid "Title when free"
 msgstr ""
 
-#: ubac-shipping.php:202
+#: dahuconcept-weight-shipping.php:141
+msgid "Uninstalling"
+msgstr ""
+
+#: dahuconcept-weight-shipping.php:238
 msgid "Visible on the order"
 msgstr ""
 
@@ -310,7 +326,7 @@ msgstr ""
 msgid "Weight price grid"
 msgstr ""
 
-#: ubac-shipping.php:170
+#: dahuconcept-weight-shipping.php:206
 msgid "Weight shipping"
 msgstr ""
 
@@ -334,15 +350,15 @@ msgstr ""
 msgid "With one or more classes selected, this method only appears when the cart holds at least one product in one of them. That is how an instance gets dedicated to one kind of product. Leave empty for no condition."
 msgstr ""
 
-#: ubac-shipping.php:230
+#: dahuconcept-weight-shipping.php:266
 msgid "Worked out from the lines of this order."
 msgstr ""
 
-#: includes/order-screen.php:246
+#: includes/order-screen.php:247
 msgid "Working out the shipping cost…"
 msgstr ""
 
-#: ubac-shipping.php:194
+#: dahuconcept-weight-shipping.php:230
 msgid "You are not allowed to view this page."
 msgstr ""
 
@@ -350,7 +366,7 @@ msgstr ""
 msgid "You do not have permission to do that."
 msgstr ""
 
-#: includes/order-screen.php:243
+#: includes/order-screen.php:244
 msgid "Zone: %s"
 msgstr ""
 
@@ -362,7 +378,7 @@ msgstr ""
 msgid "no valid bracket was found, so the previous grid has been kept."
 msgstr ""
 
-#: ubac-shipping.php:193
+#: dahuconcept-weight-shipping.php:229
 msgid "of"
 msgstr ""
 

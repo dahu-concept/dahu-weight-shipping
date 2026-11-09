@@ -140,7 +140,7 @@ function ubac_shipping_calculate( $order, $method_id, $instance_id, $items_with_
 	if ( ! isset( $calculators[ $method_id ] ) ) {
 		return new WP_Error(
 			'manual',
-			__( 'The price for this shipping method has to be filled in by hand.', 'ubac-shipping' )
+			__( 'The price for this shipping method has to be filled in by hand.', 'dahuconcept-weight-shipping' )
 		);
 	}
 
@@ -153,7 +153,7 @@ function ubac_shipping_calculate( $order, $method_id, $instance_id, $items_with_
 	if ( ! is_array( $result ) || ! isset( $result['cost'] ) ) {
 		return new WP_Error(
 			'calculator_failed',
-			__( 'The calculator for this shipping method returned nothing usable.', 'ubac-shipping' )
+			__( 'The calculator for this shipping method returned nothing usable.', 'dahuconcept-weight-shipping' )
 		);
 	}
 
@@ -162,7 +162,7 @@ function ubac_shipping_calculate( $order, $method_id, $instance_id, $items_with_
 
 	if ( ubac_shipping_order_has_free_shipping_coupon( $order ) ) {
 		$cost      = 0.0;
-		$details[] = __( 'cost brought down to zero by a free-shipping coupon', 'ubac-shipping' );
+		$details[] = __( 'cost brought down to zero by a free-shipping coupon', 'dahuconcept-weight-shipping' );
 	}
 
 	return array(
@@ -200,7 +200,7 @@ function ubac_shipping_builtin_calculator( $order, $instance_id, $items_with_qty
 	if ( ! $instance_id ) {
 		return new WP_Error(
 			'manual',
-			__( 'This line is not attached to any shipping zone instance, so its price cannot be worked out. Delete it and add it again with "Add shipping", or type the price in by hand.', 'ubac-shipping' )
+			__( 'This line is not attached to any shipping zone instance, so its price cannot be worked out. Delete it and add it again with "Add shipping", or type the price in by hand.', 'dahuconcept-weight-shipping' )
 		);
 	}
 
@@ -209,7 +209,7 @@ function ubac_shipping_builtin_calculator( $order, $instance_id, $items_with_qty
 	if ( ! $method ) {
 		return new WP_Error(
 			'instance_not_found',
-			__( 'No shipping method was found for that zone instance. It may have been removed from the zone since this line was created.', 'ubac-shipping' )
+			__( 'No shipping method was found for that zone instance. It may have been removed from the zone since this line was created.', 'dahuconcept-weight-shipping' )
 		);
 	}
 
@@ -231,7 +231,7 @@ function ubac_shipping_builtin_calculator( $order, $instance_id, $items_with_qty
 		 */
 		return new WP_Error(
 			'no_rate',
-			__( 'This method does not apply to what this order contains, because of its required or excluded shipping classes. The price has been left alone.', 'ubac-shipping' )
+			__( 'This method does not apply to what this order contains, because of its required or excluded shipping classes. The price has been left alone.', 'dahuconcept-weight-shipping' )
 		);
 	}
 

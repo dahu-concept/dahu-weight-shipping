@@ -1,4 +1,4 @@
-=== Ubac Weight Shipping ===
+=== DahuConcept Weight Shipping ===
 Contributors: dahuconcept
 Tags: weight shipping, table rate, shipping zones, shipping class, shipping
 Requires at least: 6.2
@@ -34,7 +34,7 @@ that much. Expressing that in WooCommerce means either a flat rate that is
 wrong on most orders, or a table-rate plugin that asks you to model your whole
 catalogue before it will quote anything.
 
-Ubac Weight Shipping is the small version. You paste the carrier's table into
+DahuConcept Weight Shipping is the small version. You paste the carrier's table into
 a field, one bracket per line, and the method prices every cart from it. The
 table belongs to the shipping zone, so a second country with a second contract
 is a second instance with its own table — not a conditional rule.

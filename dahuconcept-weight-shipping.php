@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name:       Ubac Weight Shipping
+ * Plugin Name:       DahuConcept Weight Shipping
  * Description:       A weight-based WooCommerce shipping method configurable per zone, with a per-zone price grid, shipping-class rules, and one-click shipping lines on manually created orders.
  * Version:           1.1.5
  * Author:            Hugo Vial-Jaime
  * Author URI:        https://dahu-concept.fr
  * License:           MIT
  * License URI:       https://opensource.org/licenses/MIT
- * Text Domain:       ubac-shipping
+ * Text Domain:       dahuconcept-weight-shipping
  * Domain Path:       /languages
  * Requires at least: 6.2
  * Requires PHP:      7.4
@@ -108,7 +108,7 @@ add_filter(
 		$page = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( ubac_shipping_settings_url() ),
-			esc_html__( 'Shipping zones', 'ubac-shipping' )
+			esc_html__( 'Shipping zones', 'dahuconcept-weight-shipping' )
 		);
 		array_unshift( $links, $page );
 		return $links;
@@ -132,15 +132,15 @@ add_filter(
  */
 function ubac_shipping_uninstall_setting( $settings ) {
 	$settings[] = array(
-		'title' => __( 'Ubac Weight Shipping', 'ubac-shipping' ),
+		'title' => __( 'DahuConcept Weight Shipping', 'dahuconcept-weight-shipping' ),
 		'type'  => 'title',
 		'id'    => 'ubac_shipping_uninstall_title',
 	);
 
 	$settings[] = array(
-		'title'    => __( 'Uninstalling', 'ubac-shipping' ),
-		'desc'     => __( "Delete this plugin's data when the plugin is deleted", 'ubac-shipping' ),
-		'desc_tip' => __( 'Off, and worth leaving off. What goes is the manually corrected shipping cost on every order line that has one — a price someone set by hand because the calculated one was wrong. Nothing reads those values without this plugin, and deleting the plugin is usually a step in reinstalling it.', 'ubac-shipping' ),
+		'title'    => __( 'Uninstalling', 'dahuconcept-weight-shipping' ),
+		'desc'     => __( "Delete this plugin's data when the plugin is deleted", 'dahuconcept-weight-shipping' ),
+		'desc_tip' => __( 'Off, and worth leaving off. What goes is the manually corrected shipping cost on every order line that has one — a price someone set by hand because the calculated one was wrong. Nothing reads those values without this plugin, and deleting the plugin is usually a step in reinstalling it.', 'dahuconcept-weight-shipping' ),
 		'id'       => 'ubac_shipping_delete_data_on_uninstall',
 		'type'     => 'checkbox',
 		'default'  => 'no',
@@ -167,7 +167,7 @@ add_filter(
 		$links[] = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( 'https://dahu-concept.fr' ),
-			esc_html__( 'Support', 'ubac-shipping' )
+			esc_html__( 'Support', 'dahuconcept-weight-shipping' )
 		);
 
 		return $links;
@@ -203,8 +203,8 @@ add_action(
 		Ubac_Welcome::register(
 			array(
 				'slug'       => 'ubac-shipping',
-				'name'       => __( 'Weight shipping', 'ubac-shipping' ),
-				'tagline'    => __( 'Keeps the order weight right, so the shipping price is too.', 'ubac-shipping' ),
+				'name'       => __( 'Weight shipping', 'dahuconcept-weight-shipping' ),
+				'tagline'    => __( 'Keeps the order weight right, so the shipping price is too.', 'dahuconcept-weight-shipping' ),
 				'file'       => UBAC_SHIPPING_FILE,
 				'version'    => UBAC_SHIPPING_VERSION,
 				'textdomain' => 'ubac-shipping',
@@ -223,24 +223,24 @@ add_action(
 				 * no text domain of its own.
 				 */
 				'strings'    => array(
-					'next'   => __( 'Next', 'ubac-shipping' ),
-					'done'   => __( 'Done', 'ubac-shipping' ),
-					'skip'   => __( 'Skip', 'ubac-shipping' ),
-					'of'     => __( 'of', 'ubac-shipping' ),
-					'denied' => __( 'You are not allowed to view this page.', 'ubac-shipping' ),
+					'next'   => __( 'Next', 'dahuconcept-weight-shipping' ),
+					'done'   => __( 'Done', 'dahuconcept-weight-shipping' ),
+					'skip'   => __( 'Skip', 'dahuconcept-weight-shipping' ),
+					'of'     => __( 'of', 'dahuconcept-weight-shipping' ),
+					'denied' => __( 'You are not allowed to view this page.', 'dahuconcept-weight-shipping' ),
 				),
 				'points'     => array(
 				array(
-					'title' => __( 'Computed from the lines', 'ubac-shipping' ),
-					'text'  => __( 'The weight follows what is actually in the order.', 'ubac-shipping' ),
+					'title' => __( 'Computed from the lines', 'dahuconcept-weight-shipping' ),
+					'text'  => __( 'The weight follows what is actually in the order.', 'dahuconcept-weight-shipping' ),
 				),
 				array(
-					'title' => __( 'Visible on the order', 'ubac-shipping' ),
-					'text'  => __( 'Shown where somebody packing can check it.', 'ubac-shipping' ),
+					'title' => __( 'Visible on the order', 'dahuconcept-weight-shipping' ),
+					'text'  => __( 'Shown where somebody packing can check it.', 'dahuconcept-weight-shipping' ),
 				),
 				array(
-					'title' => __( 'Recalculated on demand', 'ubac-shipping' ),
-					'text'  => __( 'One button when the order changed.', 'ubac-shipping' ),
+					'title' => __( 'Recalculated on demand', 'dahuconcept-weight-shipping' ),
+					'text'  => __( 'One button when the order changed.', 'dahuconcept-weight-shipping' ),
 				),
 				),
 
@@ -262,18 +262,18 @@ add_action(
 				'tour'        => array(
 					array(
 						'selector' => '#ubac-ws-weight-value',
-						'title'    => __( 'The order weight', 'ubac-shipping' ),
-						'text'     => __( 'Worked out from the lines of this order.', 'ubac-shipping' ),
+						'title'    => __( 'The order weight', 'dahuconcept-weight-shipping' ),
+						'text'     => __( 'Worked out from the lines of this order.', 'dahuconcept-weight-shipping' ),
 					),
 					array(
 						'selector' => '#ubac-ws-weight-refresh',
-						'title'    => __( 'Refresh after edits', 'ubac-shipping' ),
-						'text'     => __( 'Click it once the quantities have changed.', 'ubac-shipping' ),
+						'title'    => __( 'Refresh after edits', 'dahuconcept-weight-shipping' ),
+						'text'     => __( 'Click it once the quantities have changed.', 'dahuconcept-weight-shipping' ),
 					),
 					array(
 						'selector' => '.ubac-ws-panel__note',
-						'title'    => __( 'The weight that is priced', 'ubac-shipping' ),
-						'text'     => __( 'This is the weight that enters the price grid.', 'ubac-shipping' ),
+						'title'    => __( 'The weight that is priced', 'dahuconcept-weight-shipping' ),
+						'text'     => __( 'This is the weight that enters the price grid.', 'dahuconcept-weight-shipping' ),
 					),
 				),
 			)
