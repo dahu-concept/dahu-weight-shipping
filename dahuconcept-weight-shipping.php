@@ -193,7 +193,7 @@ require_once UBAC_SHIPPING_PATH . 'includes/ubac-welcome.php';
 register_activation_hook(
 	__FILE__,
 	static function () {
-		Ubac_Welcome::mark_activated( 'ubac-shipping' );
+		Ubac_Welcome::mark_activated( 'dahuconcept-weight-shipping' );
 	}
 );
 
@@ -202,12 +202,12 @@ add_action(
 	static function () {
 		Ubac_Welcome::register(
 			array(
-				'slug'       => 'ubac-shipping',
+				'slug'       => 'dahuconcept-weight-shipping',
 				'name'       => __( 'Weight shipping', 'dahuconcept-weight-shipping' ),
 				'tagline'    => __( 'Keeps the order weight right, so the shipping price is too.', 'dahuconcept-weight-shipping' ),
 				'file'       => UBAC_SHIPPING_FILE,
 				'version'    => UBAC_SHIPPING_VERSION,
-				'textdomain' => 'ubac-shipping',
+				'textdomain' => 'dahuconcept-weight-shipping',
 				'mark'       => array(
 					'view'  => '0 0 112 112',
 					'paths' => array(
