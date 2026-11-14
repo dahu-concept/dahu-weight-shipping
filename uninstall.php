@@ -91,6 +91,7 @@ function ubac_shipping_uninstall_site() {
 	$table = $wpdb->prefix . 'woocommerce_order_itemmeta';
 
 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange -- order item meta has no API for deleting one key across every line, and this runs once, on uninstall.
+	// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- deleting by meta key alone IS the intent, once, at uninstall; indexing for it would cost every write for the life of the shop.
 	$wpdb->delete( $table, array( 'meta_key' => '_ubac_shipping_manual_cost' ) );
 }
 
