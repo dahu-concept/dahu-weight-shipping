@@ -1,4 +1,4 @@
-=== DahuConcept Weight Shipping ===
+=== DahuConcept Weight Shipping for WooCommerce ===
 Contributors: dahuconcept
 Tags: weight shipping, table rate, shipping zones, shipping class, parcel weight
 Requires at least: 6.2

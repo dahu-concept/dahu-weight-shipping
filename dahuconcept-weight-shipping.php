@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       DahuConcept Weight Shipping
+ * Plugin Name:       DahuConcept Weight Shipping for WooCommerce
  * Description:       A weight-based WooCommerce shipping method configurable per zone, with a per-zone price grid, shipping-class rules, and one-click shipping lines on manually created orders.
  * Version:           1.1.5
  * Author:            Hugo Vial-Jaime
@@ -11,6 +11,7 @@
  * Domain Path:       /languages
  * Requires at least: 6.2
  * Requires PHP:      7.4
+ * Requires Plugins: woocommerce
  * WC requires at least: 7.0
  * WC tested up to:   11.2
  *
