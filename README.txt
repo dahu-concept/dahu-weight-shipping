@@ -1,6 +1,6 @@
 === DahuConcept Weight Shipping for WooCommerce ===
 Contributors: dahuconcept
-Tags: weight shipping, table rate, shipping zones, shipping class, parcel weight
+Tags: weight shipping, table rate, shipping zones, shipping class, woocommerce
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
